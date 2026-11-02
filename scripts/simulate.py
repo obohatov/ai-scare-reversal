@@ -25,7 +25,8 @@ from typing import Any, Sequence
 import numpy as np
 import pandas as pd
 
-from scripts.data_repo import DATA_DIR, PANEL_PATH
+from scripts.data_repo import PANEL_PATH
+from scripts.settings import REPORTS_DIR
 from scripts.train import PREDICTIONS_PATH
 from scripts.transform import EVENTS_PATH, HORIZON
 
@@ -389,7 +390,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.period == "test" and not args.confirm_frozen:
         parser.error("The test period needs --confirm-frozen: fix the strategies first.")
     report = run(args.period)
-    path = DATA_DIR.parent / "reports" / f"simulation_{args.period}.json"
+    path = REPORTS_DIR / f"simulation_{args.period}.json"
     path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({key: report[key] for key in ("first", "last", "events", "index", "equal_weight_index", "cash")}, indent=2))
     print(f"Report: {path}")

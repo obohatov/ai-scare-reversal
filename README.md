@@ -2,7 +2,7 @@
 
 Final project for the [Stock Markets Analytics Zoomcamp 2026](https://github.com/DataTalksClub/stock-markets-analytics-zoomcamp) by DataTalks.Club.
 
-> **Status:** stage 7 of 9, test period. No strategy has been tested yet, and no result here claims profitability.
+> **Status:** stage 8 of 9, automation. No strategy has been tested yet, and no result here claims profitability.
 
 ## Problem
 
@@ -98,6 +98,17 @@ python -m scripts.simulate --period test --confirm-frozen
 python -m scripts.ai_slice
 ```
 
+## Run the workflow
+
+```bash
+python main.py --mode file    # prepared dataset, set DATA_URL if data/ is empty
+python main.py --mode update  # download only new data, then trade on paper
+python main.py --mode full    # rebuild every source
+python main.py --pack         # write data/dataset.tar.gz for sharing
+```
+
+Each run ends with the newest signals under the frozen `no_news` rule. The `update` mode is scheduled on Railway through `railway.toml`, on weekdays at 22:30 UTC, and keeps its data on a volume set by `DATA_DIR`. Telegram and Alpaca steps run only when their keys are set, and Alpaca uses the paper endpoint only. The incremental price step rescales saved adjusted closes when a dividend or split changes them.
+
 ## Data sources
 
 | Source | Purpose | Access |
@@ -116,12 +127,15 @@ python -m scripts.ai_slice
 ├── data/          # local only, never committed
 ├── events/        # hand-labelled AI events
 ├── notebooks/     # research notebooks
-├── reports/       # source check reports
+├── reports/       # results and the test protocol
+├── main.py        # whole workflow
 ├── scripts/
 │   ├── ai_slice.py
+│   ├── broker.py
 │   ├── check_sources.py
 │   ├── data_repo.py
 │   ├── eda.py
+│   ├── notify.py
 │   ├── settings.py
 │   ├── simulate.py
 │   ├── train.py

@@ -18,13 +18,14 @@ from typing import Sequence
 
 import pandas as pd
 
-from scripts.data_repo import DATA_DIR, PANEL_PATH, RAW_DIR
+from scripts.data_repo import PANEL_PATH, RAW_DIR
+from scripts.settings import REPORTS_DIR
 from scripts.train import TARGET, compare_models
 from scripts.transform import add_target, build_daily, events_from_daily, frozen_members
 from scripts.universe import AI_EVENT_EXTRAS, EUROPEAN_PEERS
 
 HORIZONS = (5, 10)
-REPORT_PATH = DATA_DIR.parent / "reports" / "horizon_check.json"
+REPORT_PATH = REPORTS_DIR / "horizon_check.json"
 
 
 def summarise_horizon(events: pd.DataFrame) -> dict:

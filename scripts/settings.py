@@ -10,6 +10,8 @@ from dotenv import load_dotenv
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 REPORTS_DIR = PROJECT_ROOT / "reports"
+# A cloud run points this at a persistent volume.
+DATA_DIR = Path(os.getenv("DATA_DIR", str(PROJECT_ROOT / "data")))
 APP_NAME = "ai-scare-reversal"
 APP_VERSION = "0.1"
 
@@ -23,6 +25,8 @@ class Settings:
     telegram_bot_token: str = ""
     alpaca_api_key: str = ""
     alpaca_secret_key: str = ""
+    telegram_chat_id: str = ""
+    data_url: str = ""
 
     @property
     def has_contact(self) -> bool:
@@ -49,4 +53,6 @@ def load_settings() -> Settings:
         telegram_bot_token=os.getenv("TELEGRAM_BOT_TOKEN", "").strip(),
         alpaca_api_key=os.getenv("ALPACA_API_KEY", "").strip(),
         alpaca_secret_key=os.getenv("ALPACA_SECRET_KEY", "").strip(),
+        telegram_chat_id=os.getenv("TELEGRAM_CHAT_ID", "").strip(),
+        data_url=os.getenv("DATA_URL", "").strip(),
     )

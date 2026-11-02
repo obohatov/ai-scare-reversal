@@ -20,13 +20,14 @@ from typing import Any, Sequence
 import numpy as np
 import pandas as pd
 
-from scripts.data_repo import DATA_DIR, PANEL_PATH, RAW_DIR
+from scripts.data_repo import PANEL_PATH, RAW_DIR
+from scripts.settings import PROJECT_ROOT, REPORTS_DIR
 from scripts.simulate import BENCHMARK, TEST_END
 from scripts.transform import add_target, assign_split, build_daily
 from scripts.universe import AI_EVENT_EXTRAS, EUROPEAN_PEERS
 
-LABELS_PATH = DATA_DIR.parent / "events" / "ai_events.csv"
-REPORT_PATH = DATA_DIR.parent / "reports" / "ai_slice.json"
+LABELS_PATH = PROJECT_ROOT / "events" / "ai_events.csv"
+REPORT_PATH = REPORTS_DIR / "ai_slice.json"
 HORIZONS = (30, 90)
 LABEL_COLUMNS = ["substitutes_paid_workflow", "depends_on_proprietary_data", "product_status"]
 TOLERANCE_DAYS = 5

@@ -1,0 +1,7 @@
+[build]
+builder = "DOCKERFILE"
+
+[deploy]
+startCommand = "python main.py --mode update"
+cronSchedule = "30 22 * * 1-5"
+restartPolicyType = "NEVER"

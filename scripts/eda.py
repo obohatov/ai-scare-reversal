@@ -18,10 +18,10 @@ from typing import Sequence
 import numpy as np
 import pandas as pd
 
-from scripts.data_repo import DATA_DIR
+from scripts.settings import REPORTS_DIR
 from scripts.transform import DUMMIES, EVENTS_PATH, NUMERIC
 
-REPORT_PATH = DATA_DIR.parent / "reports" / "eda.json"
+REPORT_PATH = REPORTS_DIR / "eda.json"
 TARGET = "is_positive_rel_30d"
 TOP_FEATURES = 15
 MIN_GROUP_SIZE = 30

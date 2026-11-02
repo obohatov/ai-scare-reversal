@@ -40,7 +40,7 @@ from scripts.check_sources import (
     parse_sp500_tables,
     to_yahoo_symbol,
 )
-from scripts.settings import PROJECT_ROOT, Settings, load_settings
+from scripts.settings import DATA_DIR, REPORTS_DIR, Settings, load_settings
 from scripts.universe import (
     AI_EVENT_EXTRAS,
     BENCHMARKS,
@@ -50,7 +50,6 @@ from scripts.universe import (
     TICKER_RENAMES,
 )
 
-DATA_DIR = PROJECT_ROOT / "data"
 RAW_DIR = DATA_DIR / "raw"
 PANEL_PATH = DATA_DIR / "processed" / "panel.parquet"
 
@@ -68,6 +67,7 @@ CHUNK_PAUSE_SECONDS = 2.0
 RATE_LIMIT_PAUSE_SECONDS = 60.0
 SECTOR_PAUSE_SECONDS = 0.2
 TITLES_PER_REQUEST = 50
+UPDATE_LOOKBACK_DAYS = 7
 MARKET_CLOSE_HOUR_ET = 16
 PRICE_COLUMNS = ["open", "high", "low", "close", "adj_close", "volume"]
 STEPS = (
@@ -495,6 +495,124 @@ def fetch_wikimedia(
     return {"candidates": len(candidates), "resolved": len(articles)}
 
 
+def merge_prices(old: pd.DataFrame, new: pd.DataFrame) -> pd.DataFrame:
+    """Join fresh rows to saved history.
+
+    A dividend or split rescales all earlier adjusted closes, so the saved
+    history is rescaled to match the fresh rows on their last shared day.
+    """
+    old = with_date_unit(old, "date").sort_values("date")
+    new = with_date_unit(new, "date").sort_values("date")
+    shared = old.merge(new, on="date", suffixes=("_old", "_new"))
+    if not shared.empty:
+        last = shared.iloc[-1]
+        old = old.assign(adj_close=old["adj_close"] * last["adj_close_new"] / last["adj_close_old"])
+    kept = old[~old["date"].isin(new["date"])]
+    return pd.concat([kept, new], ignore_index=True).sort_values("date")
+
+
+def update_prices(
+    tickers: Sequence[str],
+    output_dir: Path,
+    lookback_days: int = UPDATE_LOOKBACK_DAYS,
+    chunk_size: int = CHUNK_SIZE,
+    pause_seconds: float = CHUNK_PAUSE_SECONDS,
+) -> dict[str, Any]:
+    """Refresh saved tickers from a few days before their last row."""
+    saved = [
+        ticker for ticker in tickers if (output_dir / f"{safe_name(ticker)}.parquet").exists()
+    ]
+    updated = 0
+    if not saved:
+        return {"tickers": 0, "updated": 0}
+    start = pd.read_parquet(output_dir / f"{safe_name(saved[0])}.parquet", columns=["date"])
+    begin_date = pd.Timestamp(start["date"].max()) - pd.Timedelta(days=lookback_days)
+    for begin in range(0, len(saved), chunk_size):
+        chunk = saved[begin : begin + chunk_size]
+        frame = yf.download(
+            chunk,
+            start=str(begin_date.date()),
+            group_by="ticker",
+            auto_adjust=False,
+            threads=True,
+            progress=False,
+            timeout=30,
+            multi_level_index=True,
+        )
+        for ticker in chunk:
+            rows = price_rows(frame, ticker) if frame is not None else pd.DataFrame()
+            if rows.empty:
+                continue
+            path = output_dir / f"{safe_name(ticker)}.parquet"
+            merge_prices(pd.read_parquet(path), rows).to_parquet(path)
+            updated += 1
+        if begin + chunk_size < len(saved):
+            time.sleep(pause_seconds)
+    return {"tickers": len(saved), "updated": updated}
+
+
+def update_edgar(
+    session: requests.Session, settings: Settings, tickers: Sequence[str]
+) -> dict[str, Any]:
+    """Add each company's recent filings to its saved history."""
+    if not settings.has_contact:
+        raise RuntimeError("Set CONTACT_NAME and CONTACT_EMAIL in .env")
+    headers = {"User-Agent": f"{settings.contact_name} {settings.contact_email}"}
+    output_dir = RAW_DIR / "edgar"
+    mapping = fetch(session, EDGAR_TICKERS_URL, headers=headers).json()
+    cik_by_ticker = {
+        to_yahoo_symbol(row["ticker"]): int(row["cik_str"]) for row in mapping.values()
+    }
+    updated = 0
+    for ticker in tickers:
+        path = output_dir / f"{safe_name(ticker)}.parquet"
+        if ticker not in cik_by_ticker or not path.exists():
+            continue
+        url = EDGAR_SUBMISSIONS_URL.format(cik=cik_by_ticker[ticker])
+        filings = fetch(session, url, headers=headers).json()["filings"]
+        time.sleep(EDGAR_PAUSE_SECONDS)
+        rows = pd.concat([pd.read_parquet(path), extract_8k(filings["recent"], ticker)])
+        keys = ["filing_date", "accepted_at", "items"]
+        rows.drop_duplicates(keys).to_parquet(path)
+        updated += 1
+    return {"updated": updated}
+
+
+def update_wikimedia(session: requests.Session, settings: Settings) -> dict[str, Any]:
+    """Refresh the last days of page views for known articles."""
+    articles_path = RAW_DIR / "articles.json"
+    if not settings.has_contact or not articles_path.exists():
+        return {"updated": 0}
+    articles = json.loads(articles_path.read_text())
+    headers = {"User-Agent": build_user_agent(settings)}
+    now = datetime.now(timezone.utc)
+    start = f"{now - pd.Timedelta(days=UPDATE_LOOKBACK_DAYS):%Y%m%d}00"
+    end = f"{now:%Y%m%d}00"
+    updated = 0
+    for ticker, article in articles.items():
+        path = RAW_DIR / "pageviews" / f"{safe_name(ticker)}.parquet"
+        if not path.exists():
+            continue
+        url = WIKIMEDIA_URL.format(article=quote(article, safe=""), start=start, end=end)
+        try:
+            items = fetch(session, url, headers=headers).json().get("items", [])
+        except requests.HTTPError:
+            continue
+        fresh = pd.DataFrame(
+            {
+                "date": pd.to_datetime(
+                    [item["timestamp"][:8] for item in items], format="%Y%m%d"
+                ),
+                "ticker": ticker,
+                "pageviews": [float(item["views"]) for item in items],
+            }
+        )
+        rows = pd.concat([pd.read_parquet(path), fresh], ignore_index=True)
+        rows.drop_duplicates(["date"], keep="last").to_parquet(path)
+        updated += 1
+    return {"updated": updated}
+
+
 def read_folder(folder: Path, columns: Iterable[str]) -> pd.DataFrame:
     """Read every parquet file in a folder, or return an empty frame."""
     files = sorted(folder.glob("*.parquet"))
@@ -576,7 +694,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             results[step] = make_panel(session)
         print(f"  {json.dumps(results[step])[:600]}", flush=True)
 
-    report = DATA_DIR.parent / "reports" / "data_build.json"
+    report = REPORTS_DIR / "data_build.json"
     report.write_text(json.dumps(results, indent=2) + "\n", encoding="utf-8")
     print(f"Report: {report}")
     return 0

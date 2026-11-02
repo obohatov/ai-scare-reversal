@@ -29,10 +29,11 @@ from sklearn.tree import DecisionTreeClassifier
 from xgboost import XGBClassifier
 
 from scripts.data_repo import DATA_DIR
+from scripts.settings import REPORTS_DIR
 from scripts.transform import DUMMIES, EVENTS_PATH, NUMERIC
 
 PREDICTIONS_PATH = DATA_DIR / "processed" / "predictions.parquet"
-REPORT_PATH = DATA_DIR.parent / "reports" / "models.json"
+REPORT_PATH = REPORTS_DIR / "models.json"
 TARGET = "is_positive_rel_30d"
 RANDOM_STATE = 42
 TOP_SHARE = 0.10

@@ -14,18 +14,19 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from typing import Sequence
 
 import numpy as np
 import pandas as pd
 
 from scripts.data_repo import DATA_DIR, PANEL_PATH, RAW_DIR
+from scripts.settings import REPORTS_DIR
 from scripts.universe import AI_EVENT_EXTRAS, BENCHMARKS, EUROPEAN_PEERS
 
 EVENTS_PATH = DATA_DIR / "processed" / "events.parquet"
-FEATURE_SETS_PATH = DATA_DIR.parent / "reports" / "feature_sets.json"
-SUMMARY_PATH = DATA_DIR.parent / "reports" / "features_summary.json"
+FEATURE_SETS_PATH = REPORTS_DIR / "feature_sets.json"
+SUMMARY_PATH = REPORTS_DIR / "features_summary.json"
 
 HORIZON = 30
 Z_THRESHOLD = -2.5
@@ -62,6 +63,15 @@ def last_complete_session(dates: pd.Series, today: date) -> pd.Timestamp:
     if latest.date() < today:
         return latest
     return pd.Timestamp(dates[dates < pd.Timestamp(today)].max())
+
+
+def session_cutoff_date(now: datetime | None = None) -> date:
+    """Return the first date treated as unfinished.
+
+    US markets are closed by 22:00 UTC, so a later run keeps that day's rows.
+    """
+    moment = now or datetime.now(timezone.utc)
+    return (moment + timedelta(hours=2)).date()
 
 
 def select_rows(
@@ -371,8 +381,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     membership = pd.read_parquet(RAW_DIR / "membership.parquet")
     allowed = set(membership["ticker"]) | set(EUROPEAN_PEERS) | set(AI_EVENT_EXTRAS)
     covered = {path.stem for path in (RAW_DIR / "edgar").glob("*.parquet")}
-    today = datetime.now(timezone.utc).date()
-    daily = build_daily(panel, allowed, covered, today)
+    daily = build_daily(panel, allowed, covered, session_cutoff_date())
     events = events_from_daily(daily, frozen_members(membership))
 
     events.to_parquet(EVENTS_PATH)

@@ -3,4 +3,4 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
-CMD ["python", "-m", "scripts.check_sources", "--label", "railway", "--only", "host,universe,yahoo_prices"]
+CMD ["python", "main.py", "--mode", "update"]
