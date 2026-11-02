@@ -277,20 +277,39 @@ def universe_groups(tickers: pd.Series, frozen: set[str]) -> pd.DataFrame:
     )
 
 
-def build_events(
-    panel: pd.DataFrame,
-    allowed: set[str],
-    frozen: set[str],
-    covered: set[str],
-    today: date,
+def build_daily(
+    panel: pd.DataFrame, allowed: set[str], covered: set[str], today: date
 ) -> pd.DataFrame:
-    """Run every step and return one row per event."""
+    """Run every step and return one row per stock and session."""
     df = select_rows(panel, allowed, today)
     df = add_price_features(df)
     df = add_sector_features(df)
     df = add_context_features(df, covered)
     df = add_target(df)
-    df = add_event_history(df)
+    return add_event_history(df)
+
+
+def daily_baseline(daily: pd.DataFrame) -> dict:
+    """How often an index member beats its sector on an ordinary day.
+
+    Results for the test period are left out on purpose.
+    """
+    rows = daily[daily["in_sp500"] & daily["is_positive_rel_30d"].notna()]
+    splits = assign_split(rows["date"])
+    baseline = {}
+    for split in ("train", "validation"):
+        ordinary = rows[(splits == split) & ~rows["is_event"]]
+        baseline[split] = {
+            "days": len(ordinary),
+            "beat_sector": round(float(ordinary["is_positive_rel_30d"].mean()), 4),
+            "median_rel_growth": round(float(ordinary["rel_growth_30d"].median()), 4),
+        }
+    return baseline
+
+
+def events_from_daily(daily: pd.DataFrame, frozen: set[str]) -> pd.DataFrame:
+    """Keep the event rows and the columns later stages need."""
+    df = daily
     events = df[df["is_event"]].copy()
     events["split"] = assign_split(events["date"])
     events = events.join(universe_groups(events["ticker"], frozen))
@@ -301,6 +320,17 @@ def build_events(
         "is_event_extra", *TO_PREDICT, *NUMERIC, *DUMMIES,
     ]
     return events.loc[tradable, columns].reset_index(drop=True)
+
+
+def build_events(
+    panel: pd.DataFrame,
+    allowed: set[str],
+    frozen: set[str],
+    covered: set[str],
+    today: date,
+) -> pd.DataFrame:
+    """Run every step and return one row per event."""
+    return events_from_daily(build_daily(panel, allowed, covered, today), frozen)
 
 
 def summarise(events: pd.DataFrame) -> dict:
@@ -342,12 +372,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     allowed = set(membership["ticker"]) | set(EUROPEAN_PEERS) | set(AI_EVENT_EXTRAS)
     covered = {path.stem for path in (RAW_DIR / "edgar").glob("*.parquet")}
     today = datetime.now(timezone.utc).date()
-    events = build_events(panel, allowed, frozen_members(membership), covered, today)
+    daily = build_daily(panel, allowed, covered, today)
+    events = events_from_daily(daily, frozen_members(membership))
 
     events.to_parquet(EVENTS_PATH)
     feature_sets = {"TO_PREDICT": TO_PREDICT, "NUMERIC": NUMERIC, "DUMMIES": DUMMIES}
     FEATURE_SETS_PATH.write_text(json.dumps(feature_sets, indent=2) + "\n", encoding="utf-8")
     summary = summarise(events)
+    summary["ordinary_days"] = daily_baseline(daily)
     SUMMARY_PATH.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(summary, indent=2))
     return 0

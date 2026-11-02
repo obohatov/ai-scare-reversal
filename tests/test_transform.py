@@ -174,6 +174,13 @@ def test_summary_hides_test_outcomes() -> None:
     assert "base_rate" not in summary["test"]
 
 
+def test_daily_baseline_covers_only_train_and_validation() -> None:
+    daily = tf.build_daily(make_panel(sessions=900), set(TICKERS), set(TICKERS), TODAY)
+    baseline = tf.daily_baseline(daily)
+    assert set(baseline) == {"train", "validation"}
+    assert 0 < baseline["train"]["beat_sector"] < 1
+
+
 def test_feature_lists_are_large_enough_and_unique() -> None:
     assert len(tf.NUMERIC) == len(set(tf.NUMERIC))
     assert len(tf.NUMERIC) >= 20

@@ -1,0 +1,638 @@
+{
+  "train": {
+    "events": 12056,
+    "news": {
+      "earnings_8k": {
+        "events": 3822,
+        "beat_sector": 0.4437,
+        "std_error": 0.008,
+        "median_rel_growth": 0.9901
+      },
+      "no_8k": {
+        "events": 6445,
+        "beat_sector": 0.4697,
+        "std_error": 0.0062,
+        "median_rel_growth": 0.9942
+      },
+      "other_8k": {
+        "events": 928,
+        "beat_sector": 0.4547,
+        "std_error": 0.0163,
+        "median_rel_growth": 0.9923
+      },
+      "unknown": {
+        "events": 861,
+        "beat_sector": 0.4657,
+        "std_error": 0.017,
+        "median_rel_growth": 0.994
+      }
+    },
+    "breakdowns": {
+      "sector": {
+        "Basic Materials": {
+          "events": 485,
+          "beat_sector": 0.4474,
+          "std_error": 0.0226,
+          "median_rel_growth": 0.9898
+        },
+        "Communication Services": {
+          "events": 534,
+          "beat_sector": 0.4438,
+          "std_error": 0.0215,
+          "median_rel_growth": 0.9879
+        },
+        "Consumer Cyclical": {
+          "events": 1919,
+          "beat_sector": 0.4669,
+          "std_error": 0.0114,
+          "median_rel_growth": 0.9907
+        },
+        "Consumer Defensive": {
+          "events": 836,
+          "beat_sector": 0.4629,
+          "std_error": 0.0172,
+          "median_rel_growth": 0.994
+        },
+        "Energy": {
+          "events": 839,
+          "beat_sector": 0.4219,
+          "std_error": 0.0171,
+          "median_rel_growth": 0.9842
+        },
+        "Financial Services": {
+          "events": 1487,
+          "beat_sector": 0.4909,
+          "std_error": 0.013,
+          "median_rel_growth": 0.9984
+        },
+        "Healthcare": {
+          "events": 1387,
+          "beat_sector": 0.434,
+          "std_error": 0.0133,
+          "median_rel_growth": 0.9889
+        },
+        "Industrials": {
+          "events": 1727,
+          "beat_sector": 0.465,
+          "std_error": 0.012,
+          "median_rel_growth": 0.994
+        },
+        "Real Estate": {
+          "events": 449,
+          "beat_sector": 0.4699,
+          "std_error": 0.0236,
+          "median_rel_growth": 0.9955
+        },
+        "Technology": {
+          "events": 1795,
+          "beat_sector": 0.4646,
+          "std_error": 0.0118,
+          "median_rel_growth": 0.9935
+        },
+        "Utilities": {
+          "events": 598,
+          "beat_sector": 0.4599,
+          "std_error": 0.0204,
+          "median_rel_growth": 0.995
+        }
+      },
+      "month": {
+        "1": {
+          "events": 1065,
+          "beat_sector": 0.4338,
+          "std_error": 0.0152,
+          "median_rel_growth": 0.9886
+        },
+        "10": {
+          "events": 1515,
+          "beat_sector": 0.4719,
+          "std_error": 0.0128,
+          "median_rel_growth": 0.9949
+        },
+        "11": {
+          "events": 1348,
+          "beat_sector": 0.4711,
+          "std_error": 0.0136,
+          "median_rel_growth": 0.9933
+        },
+        "12": {
+          "events": 504,
+          "beat_sector": 0.4643,
+          "std_error": 0.0222,
+          "median_rel_growth": 0.9923
+        },
+        "2": {
+          "events": 1079,
+          "beat_sector": 0.43,
+          "std_error": 0.0151,
+          "median_rel_growth": 0.9862
+        },
+        "3": {
+          "events": 1326,
+          "beat_sector": 0.4736,
+          "std_error": 0.0137,
+          "median_rel_growth": 0.9954
+        },
+        "4": {
+          "events": 915,
+          "beat_sector": 0.4645,
+          "std_error": 0.0165,
+          "median_rel_growth": 0.9923
+        },
+        "5": {
+          "events": 907,
+          "beat_sector": 0.462,
+          "std_error": 0.0166,
+          "median_rel_growth": 0.9938
+        },
+        "6": {
+          "events": 706,
+          "beat_sector": 0.4802,
+          "std_error": 0.0188,
+          "median_rel_growth": 0.9976
+        },
+        "7": {
+          "events": 1006,
+          "beat_sector": 0.4264,
+          "std_error": 0.0156,
+          "median_rel_growth": 0.9878
+        },
+        "8": {
+          "events": 912,
+          "beat_sector": 0.4825,
+          "std_error": 0.0165,
+          "median_rel_growth": 0.9969
+        },
+        "9": {
+          "events": 773,
+          "beat_sector": 0.4605,
+          "std_error": 0.0179,
+          "median_rel_growth": 0.9931
+        }
+      },
+      "weekday": {
+        "0": {
+          "events": 1756,
+          "beat_sector": 0.4339,
+          "std_error": 0.0118,
+          "median_rel_growth": 0.9884
+        },
+        "1": {
+          "events": 2391,
+          "beat_sector": 0.4601,
+          "std_error": 0.0102,
+          "median_rel_growth": 0.9931
+        },
+        "2": {
+          "events": 2579,
+          "beat_sector": 0.4649,
+          "std_error": 0.0098,
+          "median_rel_growth": 0.9934
+        },
+        "3": {
+          "events": 3083,
+          "beat_sector": 0.4395,
+          "std_error": 0.0089,
+          "median_rel_growth": 0.9892
+        },
+        "4": {
+          "events": 2247,
+          "beat_sector": 0.5029,
+          "std_error": 0.0105,
+          "median_rel_growth": 1.0007
+        }
+      },
+      "drop_size_bin": {
+        "10_to_15": {
+          "events": 805,
+          "beat_sector": 0.4609,
+          "std_error": 0.0176,
+          "median_rel_growth": 0.992
+        },
+        "3_to_6": {
+          "events": 8276,
+          "beat_sector": 0.4604,
+          "std_error": 0.0055,
+          "median_rel_growth": 0.9934
+        },
+        "6_to_10": {
+          "events": 2674,
+          "beat_sector": 0.4547,
+          "std_error": 0.0096,
+          "median_rel_growth": 0.9903
+        },
+        "over_15": {
+          "events": 301,
+          "beat_sector": 0.495,
+          "std_error": 0.0288,
+          "median_rel_growth": 0.9968
+        }
+      },
+      "vix_regime": {
+        "calm": {
+          "events": 3618,
+          "beat_sector": 0.4619,
+          "std_error": 0.0083,
+          "median_rel_growth": 0.9938
+        },
+        "high": {
+          "events": 3168,
+          "beat_sector": 0.4703,
+          "std_error": 0.0089,
+          "median_rel_growth": 0.9937
+        },
+        "normal": {
+          "events": 3436,
+          "beat_sector": 0.4604,
+          "std_error": 0.0085,
+          "median_rel_growth": 0.9935
+        },
+        "panic": {
+          "events": 1834,
+          "beat_sector": 0.4378,
+          "std_error": 0.0116,
+          "median_rel_growth": 0.9859
+        }
+      }
+    },
+    "year": {
+      "2010": {
+        "events": 606,
+        "beat_sector": 0.4125,
+        "std_error": 0.02,
+        "median_rel_growth": 0.9851
+      },
+      "2011": {
+        "events": 872,
+        "beat_sector": 0.4736,
+        "std_error": 0.0169,
+        "median_rel_growth": 0.9962
+      },
+      "2012": {
+        "events": 696,
+        "beat_sector": 0.4756,
+        "std_error": 0.0189,
+        "median_rel_growth": 0.9958
+      },
+      "2013": {
+        "events": 513,
+        "beat_sector": 0.4366,
+        "std_error": 0.0219,
+        "median_rel_growth": 0.988
+      },
+      "2014": {
+        "events": 653,
+        "beat_sector": 0.4472,
+        "std_error": 0.0195,
+        "median_rel_growth": 0.9916
+      },
+      "2015": {
+        "events": 741,
+        "beat_sector": 0.417,
+        "std_error": 0.0181,
+        "median_rel_growth": 0.9839
+      },
+      "2016": {
+        "events": 925,
+        "beat_sector": 0.4778,
+        "std_error": 0.0164,
+        "median_rel_growth": 0.9953
+      },
+      "2017": {
+        "events": 920,
+        "beat_sector": 0.4772,
+        "std_error": 0.0165,
+        "median_rel_growth": 0.9969
+      },
+      "2018": {
+        "events": 1150,
+        "beat_sector": 0.4765,
+        "std_error": 0.0147,
+        "median_rel_growth": 0.9941
+      },
+      "2019": {
+        "events": 994,
+        "beat_sector": 0.4889,
+        "std_error": 0.0159,
+        "median_rel_growth": 0.9986
+      },
+      "2020": {
+        "events": 1622,
+        "beat_sector": 0.4081,
+        "std_error": 0.0122,
+        "median_rel_growth": 0.9763
+      },
+      "2021": {
+        "events": 1037,
+        "beat_sector": 0.4851,
+        "std_error": 0.0155,
+        "median_rel_growth": 0.9973
+      },
+      "2022": {
+        "events": 1327,
+        "beat_sector": 0.4876,
+        "std_error": 0.0137,
+        "median_rel_growth": 0.9972
+      }
+    },
+    "top_correlations": {
+      "sector_share_down": -0.0384,
+      "dgs2": 0.0375,
+      "dff": 0.034,
+      "events_past_252": 0.0338,
+      "sessions_since_event": -0.0332,
+      "dgs10": 0.0303,
+      "market_share_down": -0.028,
+      "yield_curve": -0.0272,
+      "has_8k_2d": -0.0236,
+      "has_earnings_2d": -0.0229,
+      "rel_volatility_60": 0.0205,
+      "rel_ret_5d_before": -0.0173,
+      "rel_z": 0.0167,
+      "volume_ratio_20": -0.0165,
+      "ret_1d": 0.0165
+    }
+  },
+  "validation": {
+    "events": 2514,
+    "news": {
+      "earnings_8k": {
+        "events": 973,
+        "beat_sector": 0.4491,
+        "std_error": 0.0159,
+        "median_rel_growth": 0.9894
+      },
+      "no_8k": {
+        "events": 1221,
+        "beat_sector": 0.4627,
+        "std_error": 0.0143,
+        "median_rel_growth": 0.9906
+      },
+      "other_8k": {
+        "events": 151,
+        "beat_sector": 0.4172,
+        "std_error": 0.0401,
+        "median_rel_growth": 0.9837
+      },
+      "unknown": {
+        "events": 169,
+        "beat_sector": 0.3787,
+        "std_error": 0.0373,
+        "median_rel_growth": 0.979
+      }
+    },
+    "breakdowns": {
+      "sector": {
+        "Basic Materials": {
+          "events": 109,
+          "beat_sector": 0.4587,
+          "std_error": 0.0477,
+          "median_rel_growth": 0.9937
+        },
+        "Communication Services": {
+          "events": 109,
+          "beat_sector": 0.4128,
+          "std_error": 0.0472,
+          "median_rel_growth": 0.9808
+        },
+        "Consumer Cyclical": {
+          "events": 312,
+          "beat_sector": 0.4103,
+          "std_error": 0.0278,
+          "median_rel_growth": 0.9812
+        },
+        "Consumer Defensive": {
+          "events": 149,
+          "beat_sector": 0.5101,
+          "std_error": 0.041,
+          "median_rel_growth": 1.0018
+        },
+        "Energy": {
+          "events": 67,
+          "beat_sector": 0.4627,
+          "std_error": 0.0609,
+          "median_rel_growth": 0.979
+        },
+        "Financial Services": {
+          "events": 328,
+          "beat_sector": 0.4665,
+          "std_error": 0.0275,
+          "median_rel_growth": 0.9907
+        },
+        "Healthcare": {
+          "events": 384,
+          "beat_sector": 0.5026,
+          "std_error": 0.0255,
+          "median_rel_growth": 1.0002
+        },
+        "Industrials": {
+          "events": 410,
+          "beat_sector": 0.4341,
+          "std_error": 0.0245,
+          "median_rel_growth": 0.988
+        },
+        "Real Estate": {
+          "events": 97,
+          "beat_sector": 0.4021,
+          "std_error": 0.0498,
+          "median_rel_growth": 0.983
+        },
+        "Technology": {
+          "events": 426,
+          "beat_sector": 0.4671,
+          "std_error": 0.0242,
+          "median_rel_growth": 0.9925
+        },
+        "Utilities": {
+          "events": 123,
+          "beat_sector": 0.3008,
+          "std_error": 0.0414,
+          "median_rel_growth": 0.9723
+        }
+      },
+      "month": {
+        "1": {
+          "events": 179,
+          "beat_sector": 0.4022,
+          "std_error": 0.0367,
+          "median_rel_growth": 0.9835
+        },
+        "10": {
+          "events": 289,
+          "beat_sector": 0.4464,
+          "std_error": 0.0292,
+          "median_rel_growth": 0.9822
+        },
+        "11": {
+          "events": 274,
+          "beat_sector": 0.4124,
+          "std_error": 0.0297,
+          "median_rel_growth": 0.9843
+        },
+        "12": {
+          "events": 96,
+          "beat_sector": 0.6042,
+          "std_error": 0.0499,
+          "median_rel_growth": 1.0279
+        },
+        "2": {
+          "events": 240,
+          "beat_sector": 0.5333,
+          "std_error": 0.0322,
+          "median_rel_growth": 1.0079
+        },
+        "3": {
+          "events": 165,
+          "beat_sector": 0.3697,
+          "std_error": 0.0376,
+          "median_rel_growth": 0.978
+        },
+        "4": {
+          "events": 232,
+          "beat_sector": 0.444,
+          "std_error": 0.0326,
+          "median_rel_growth": 0.9895
+        },
+        "5": {
+          "events": 272,
+          "beat_sector": 0.4154,
+          "std_error": 0.0299,
+          "median_rel_growth": 0.9842
+        },
+        "6": {
+          "events": 135,
+          "beat_sector": 0.5407,
+          "std_error": 0.0429,
+          "median_rel_growth": 1.014
+        },
+        "7": {
+          "events": 278,
+          "beat_sector": 0.4568,
+          "std_error": 0.0299,
+          "median_rel_growth": 0.9896
+        },
+        "8": {
+          "events": 174,
+          "beat_sector": 0.4713,
+          "std_error": 0.0378,
+          "median_rel_growth": 0.9956
+        },
+        "9": {
+          "events": 180,
+          "beat_sector": 0.3889,
+          "std_error": 0.0363,
+          "median_rel_growth": 0.9771
+        }
+      },
+      "weekday": {
+        "0": {
+          "events": 249,
+          "beat_sector": 0.3976,
+          "std_error": 0.031,
+          "median_rel_growth": 0.9744
+        },
+        "1": {
+          "events": 462,
+          "beat_sector": 0.4156,
+          "std_error": 0.0229,
+          "median_rel_growth": 0.9856
+        },
+        "2": {
+          "events": 592,
+          "beat_sector": 0.4561,
+          "std_error": 0.0205,
+          "median_rel_growth": 0.9892
+        },
+        "3": {
+          "events": 791,
+          "beat_sector": 0.4614,
+          "std_error": 0.0177,
+          "median_rel_growth": 0.9902
+        },
+        "4": {
+          "events": 420,
+          "beat_sector": 0.4833,
+          "std_error": 0.0244,
+          "median_rel_growth": 0.9964
+        }
+      },
+      "drop_size_bin": {
+        "10_to_15": {
+          "events": 178,
+          "beat_sector": 0.3764,
+          "std_error": 0.0363,
+          "median_rel_growth": 0.9728
+        },
+        "3_to_6": {
+          "events": 1624,
+          "beat_sector": 0.4667,
+          "std_error": 0.0124,
+          "median_rel_growth": 0.9919
+        },
+        "6_to_10": {
+          "events": 594,
+          "beat_sector": 0.4343,
+          "std_error": 0.0203,
+          "median_rel_growth": 0.9863
+        },
+        "over_15": {
+          "events": 118,
+          "beat_sector": 0.3898,
+          "std_error": 0.0449,
+          "median_rel_growth": 0.9633
+        }
+      },
+      "vix_regime": {
+        "calm": {
+          "events": 1028,
+          "beat_sector": 0.4504,
+          "std_error": 0.0155,
+          "median_rel_growth": 0.9903
+        },
+        "high": {
+          "events": 415,
+          "beat_sector": 0.4193,
+          "std_error": 0.0242,
+          "median_rel_growth": 0.9848
+        },
+        "normal": {
+          "events": 1060,
+          "beat_sector": 0.4632,
+          "std_error": 0.0153,
+          "median_rel_growth": 0.9904
+        }
+      }
+    },
+    "year": {
+      "2023": {
+        "events": 1277,
+        "beat_sector": 0.4471,
+        "std_error": 0.0139,
+        "median_rel_growth": 0.9905
+      },
+      "2024": {
+        "events": 1237,
+        "beat_sector": 0.4511,
+        "std_error": 0.0141,
+        "median_rel_growth": 0.9876
+      }
+    },
+    "top_correlations": {
+      "sector_share_down": 0.071,
+      "log_turnover_20": 0.0645,
+      "market_share_down": 0.0527,
+      "rel_ret_1d": 0.0383,
+      "close_location": -0.0378,
+      "dff": 0.0377,
+      "vixcls": -0.0364,
+      "bamlh0a0hym2": 0.0359,
+      "sector_ret_1d": -0.0333,
+      "rel_z": 0.033,
+      "ret_21d": 0.031,
+      "rel_ret_5d_before": 0.026,
+      "dist_sma_50": 0.0259,
+      "dist_sma_200": 0.0246,
+      "market_ret_1d": -0.0243
+    }
+  }
+}

@@ -31,5 +31,17 @@
   "test_frozen_universe_events": 2890,
   "has_8k_known_share": 0.929,
   "pageviews_known_share": 0.647,
-  "numeric_features": 39
+  "numeric_features": 39,
+  "ordinary_days": {
+    "train": {
+      "days": 1289025,
+      "beat_sector": 0.4682,
+      "median_rel_growth": 0.9952
+    },
+    "validation": {
+      "days": 225224,
+      "beat_sector": 0.4676,
+      "median_rel_growth": 0.9944
+    }
+  }
 }

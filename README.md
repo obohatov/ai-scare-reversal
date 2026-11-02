@@ -2,7 +2,7 @@
 
 Final project for the [Stock Markets Analytics Zoomcamp 2026](https://github.com/DataTalksClub/stock-markets-analytics-zoomcamp) by DataTalks.Club.
 
-> **Status:** stage 4 of 9, features. No strategy has been tested yet, and no result here claims profitability.
+> **Status:** stage 5 of 9, models. No strategy has been tested yet, and no result here claims profitability.
 
 ## Problem
 
@@ -64,6 +64,15 @@ This writes `data/processed/events.parquet`, with one row per sharp fall, plus `
 - **Splits:** train to 2022, validation 2023-2024, test from 2025, with a 45-day gap before each later period.
 - **Universe:** the main test uses S&P 500 members frozen at the end of 2024. European peers and event extras were chosen because of AI scares, so they are flagged and reported separately.
 
+## Explore and train
+
+```bash
+python -m scripts.eda
+python -m scripts.train
+```
+
+`scripts.eda` writes `reports/eda.json` from the training and validation periods. `scripts.train` compares logistic regression, Decision Tree, Random Forest and XGBoost on validation, then refits the chosen model on both periods to score the test period. Test metrics are not computed at this stage.
+
 ## Data sources
 
 | Source | Purpose | Access |
@@ -86,7 +95,9 @@ This writes `data/processed/events.parquet`, with one row per sharp fall, plus `
 ├── scripts/
 │   ├── check_sources.py
 │   ├── data_repo.py
+│   ├── eda.py
 │   ├── settings.py
+│   ├── train.py
 │   ├── transform.py
 │   └── universe.py
 └── tests/

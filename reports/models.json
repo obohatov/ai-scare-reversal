@@ -1,0 +1,207 @@
+{
+  "base_rate_validation": 0.4491,
+  "chosen": {
+    "family": "tree",
+    "params": "{\"max_depth\": 3, \"min_samples_leaf\": 50}",
+    "validation_auc": 0.5086,
+    "top_events": 251,
+    "top_precision": 0.3785,
+    "top_median_rel_growth": 0.9798
+  },
+  "best_per_family": [
+    {
+      "family": "tree",
+      "params": "{\"max_depth\": 3, \"min_samples_leaf\": 50}",
+      "validation_auc": 0.5086,
+      "top_events": 251,
+      "top_precision": 0.3785,
+      "top_median_rel_growth": 0.9798
+    },
+    {
+      "family": "xgboost",
+      "params": "{\"colsample_bytree\": 0.6, \"learning_rate\": 0.03, \"max_depth\": 2, \"min_child_weight\": 20, \"n_estimators\": 300, \"subsample\": 0.8}",
+      "validation_auc": 0.4977,
+      "top_events": 251,
+      "top_precision": 0.3665,
+      "top_median_rel_growth": 0.9769
+    },
+    {
+      "family": "logistic",
+      "params": "{\"C\": 1.0}",
+      "validation_auc": 0.4959,
+      "top_events": 251,
+      "top_precision": 0.4542,
+      "top_median_rel_growth": 0.9886
+    },
+    {
+      "family": "forest",
+      "params": "{\"max_depth\": 4, \"min_samples_leaf\": 20, \"n_estimators\": 300}",
+      "validation_auc": 0.494,
+      "top_events": 251,
+      "top_precision": 0.3307,
+      "top_median_rel_growth": 0.9761
+    }
+  ],
+  "all_candidates": [
+    {
+      "family": "tree",
+      "params": "{\"max_depth\": 3, \"min_samples_leaf\": 50}",
+      "validation_auc": 0.5086,
+      "top_events": 251,
+      "top_precision": 0.3785,
+      "top_median_rel_growth": 0.9798
+    },
+    {
+      "family": "xgboost",
+      "params": "{\"colsample_bytree\": 0.6, \"learning_rate\": 0.03, \"max_depth\": 2, \"min_child_weight\": 20, \"n_estimators\": 300, \"subsample\": 0.8}",
+      "validation_auc": 0.4977,
+      "top_events": 251,
+      "top_precision": 0.3665,
+      "top_median_rel_growth": 0.9769
+    },
+    {
+      "family": "logistic",
+      "params": "{\"C\": 1.0}",
+      "validation_auc": 0.4959,
+      "top_events": 251,
+      "top_precision": 0.4542,
+      "top_median_rel_growth": 0.9886
+    },
+    {
+      "family": "logistic",
+      "params": "{\"C\": 0.1}",
+      "validation_auc": 0.4957,
+      "top_events": 251,
+      "top_precision": 0.4542,
+      "top_median_rel_growth": 0.9886
+    },
+    {
+      "family": "xgboost",
+      "params": "{\"colsample_bytree\": 0.6, \"learning_rate\": 0.03, \"max_depth\": 3, \"min_child_weight\": 20, \"n_estimators\": 100, \"subsample\": 0.8}",
+      "validation_auc": 0.4954,
+      "top_events": 251,
+      "top_precision": 0.3506,
+      "top_median_rel_growth": 0.9763
+    },
+    {
+      "family": "xgboost",
+      "params": "{\"colsample_bytree\": 0.6, \"learning_rate\": 0.03, \"max_depth\": 3, \"min_child_weight\": 20, \"n_estimators\": 300, \"subsample\": 0.8}",
+      "validation_auc": 0.4951,
+      "top_events": 251,
+      "top_precision": 0.3705,
+      "top_median_rel_growth": 0.979
+    },
+    {
+      "family": "logistic",
+      "params": "{\"C\": 0.01}",
+      "validation_auc": 0.4949,
+      "top_events": 251,
+      "top_precision": 0.4343,
+      "top_median_rel_growth": 0.984
+    },
+    {
+      "family": "forest",
+      "params": "{\"max_depth\": 4, \"min_samples_leaf\": 20, \"n_estimators\": 300}",
+      "validation_auc": 0.494,
+      "top_events": 251,
+      "top_precision": 0.3307,
+      "top_median_rel_growth": 0.9761
+    },
+    {
+      "family": "forest",
+      "params": "{\"max_depth\": 10, \"min_samples_leaf\": 50, \"n_estimators\": 300}",
+      "validation_auc": 0.4935,
+      "top_events": 251,
+      "top_precision": 0.3267,
+      "top_median_rel_growth": 0.9763
+    },
+    {
+      "family": "tree",
+      "params": "{\"max_depth\": 8, \"min_samples_leaf\": 50}",
+      "validation_auc": 0.4933,
+      "top_events": 251,
+      "top_precision": 0.4223,
+      "top_median_rel_growth": 0.9802
+    },
+    {
+      "family": "forest",
+      "params": "{\"max_depth\": 10, \"min_samples_leaf\": 20, \"n_estimators\": 300}",
+      "validation_auc": 0.4933,
+      "top_events": 251,
+      "top_precision": 0.3147,
+      "top_median_rel_growth": 0.9741
+    },
+    {
+      "family": "xgboost",
+      "params": "{\"colsample_bytree\": 0.6, \"learning_rate\": 0.03, \"max_depth\": 4, \"min_child_weight\": 20, \"n_estimators\": 100, \"subsample\": 0.8}",
+      "validation_auc": 0.4931,
+      "top_events": 251,
+      "top_precision": 0.3307,
+      "top_median_rel_growth": 0.9757
+    },
+    {
+      "family": "xgboost",
+      "params": "{\"colsample_bytree\": 0.6, \"learning_rate\": 0.03, \"max_depth\": 2, \"min_child_weight\": 20, \"n_estimators\": 100, \"subsample\": 0.8}",
+      "validation_auc": 0.4922,
+      "top_events": 251,
+      "top_precision": 0.3546,
+      "top_median_rel_growth": 0.9772
+    },
+    {
+      "family": "forest",
+      "params": "{\"max_depth\": 6, \"min_samples_leaf\": 20, \"n_estimators\": 300}",
+      "validation_auc": 0.4922,
+      "top_events": 251,
+      "top_precision": 0.3307,
+      "top_median_rel_growth": 0.9761
+    },
+    {
+      "family": "tree",
+      "params": "{\"max_depth\": 5, \"min_samples_leaf\": 50}",
+      "validation_auc": 0.4912,
+      "top_events": 251,
+      "top_precision": 0.3506,
+      "top_median_rel_growth": 0.9772
+    },
+    {
+      "family": "tree",
+      "params": "{\"max_depth\": 6, \"min_samples_leaf\": 50}",
+      "validation_auc": 0.49,
+      "top_events": 251,
+      "top_precision": 0.4104,
+      "top_median_rel_growth": 0.9853
+    },
+    {
+      "family": "forest",
+      "params": "{\"max_depth\": 4, \"min_samples_leaf\": 50, \"n_estimators\": 300}",
+      "validation_auc": 0.4899,
+      "top_events": 251,
+      "top_precision": 0.3347,
+      "top_median_rel_growth": 0.9766
+    },
+    {
+      "family": "tree",
+      "params": "{\"max_depth\": 4, \"min_samples_leaf\": 50}",
+      "validation_auc": 0.4891,
+      "top_events": 251,
+      "top_precision": 0.3426,
+      "top_median_rel_growth": 0.9745
+    },
+    {
+      "family": "forest",
+      "params": "{\"max_depth\": 6, \"min_samples_leaf\": 50, \"n_estimators\": 300}",
+      "validation_auc": 0.4886,
+      "top_events": 251,
+      "top_precision": 0.3386,
+      "top_median_rel_growth": 0.9763
+    },
+    {
+      "family": "xgboost",
+      "params": "{\"colsample_bytree\": 0.6, \"learning_rate\": 0.03, \"max_depth\": 4, \"min_child_weight\": 20, \"n_estimators\": 300, \"subsample\": 0.8}",
+      "validation_auc": 0.4855,
+      "top_events": 251,
+      "top_precision": 0.3546,
+      "top_median_rel_growth": 0.9772
+    }
+  ]
+}
