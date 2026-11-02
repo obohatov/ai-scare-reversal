@@ -1,0 +1,17 @@
+# Secrets
+.env
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Data never goes to GitHub
+data/*
+!data/.gitkeep
+*.parquet
+*.brotli
+*.zip
