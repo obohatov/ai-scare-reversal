@@ -216,8 +216,9 @@ def parse_sp500_tables(html: str) -> tuple[pd.DataFrame, int, str | None]:
     """Return constituents, the number of change rows and the earliest change."""
     tables = pd.read_html(StringIO(html), extract_links="body")
     raw = next((t for t in tables if {"Symbol", "Security"} <= set(t.columns)), None)
+    # The page no longer carries a table of index changes, so it is optional.
     changes = next((t for t in tables if "Effective Date" in str(t.columns[0])), None)
-    if raw is None or changes is None:
+    if raw is None:
         raise ValueError("The S&P 500 page no longer has the expected tables.")
     text = raw.map(cell_text)
     links = raw["Security"].map(lambda cell: cell[1] if isinstance(cell, tuple) else None)
@@ -231,6 +232,8 @@ def parse_sp500_tables(html: str) -> tuple[pd.DataFrame, int, str | None]:
             "article": links.map(article_from_href),
         }
     )
+    if changes is None:
+        return constituents, 0, None
     change_dates = pd.to_datetime(
         changes.iloc[:, 0].map(cell_text), errors="coerce", format="mixed"
     ).dropna()
@@ -357,9 +360,14 @@ def check_universe(
         "earliest_change": earliest_change,
     }
     status = PASS if count >= 480 and change_rows > 0 else WARN
+    changes_text = (
+        f"{change_rows} change rows from {earliest_change}"
+        if change_rows
+        else "no table of index changes on the page"
+    )
     summary = (
         f"{count} members, {with_cik} with CIK, {with_article} with article links, "
-        f"{change_rows} change rows from {earliest_change}"
+        f"{changes_text}"
     )
     return (status, summary, details), constituents["symbol"].tolist()
 

@@ -278,6 +278,13 @@ def test_write_report_creates_both_files_without_secrets(tmp_path) -> None:
     assert payload["results"][0]["source"] == "edgar"
 
 
+def test_parse_sp500_tables_accepts_a_page_without_changes() -> None:
+    html = WIKI_HTML.split('<table id="changes">')[0] + "</body></html>"
+    members, change_rows, earliest = cs.parse_sp500_tables(html)
+    assert len(members) == 2
+    assert (change_rows, earliest) == (0, None)
+
+
 def test_parse_sp500_tables_explains_a_changed_page() -> None:
     with pytest.raises(ValueError, match="expected tables"):
         cs.parse_sp500_tables("<table><tr><th>Other</th></tr><tr><td>1</td></tr></table>")

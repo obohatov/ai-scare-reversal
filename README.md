@@ -49,7 +49,7 @@ python -m scripts.check_sources --label server --only host,universe,yahoo_prices
 |---|---|---|
 | Yahoo Finance | Daily prices, benchmarks, earnings dates | `yfinance` |
 | FRED | Macro series | Public CSV endpoint |
-| Wikipedia | S&P 500 members and index changes | Public page |
+| Wikipedia | S&P 500 members and date added | Public page |
 | SEC EDGAR | 8-K filings as a firm-news flag | Free; clients declare a name and email |
 | Wikimedia | Daily page views as an attention signal | Free; clients declare a contact |
 

@@ -35,7 +35,7 @@ EUROPEAN_PEERS = [
     # Advertising
     "PUB.PA", "WPP.L",
     # Staffing and wealth management
-    "RAND.AS", "SJP.L",
+    "RAND.AS", "STJ.L",
     # Freight logistics
     "DSV.CO", "KNIN.SW", "DHL.DE",
     # Gaming
