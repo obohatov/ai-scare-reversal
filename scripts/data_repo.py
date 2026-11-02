@@ -15,6 +15,7 @@ import json
 import re
 import sys
 import time
+import warnings
 from datetime import datetime, timezone
 from io import StringIO
 from pathlib import Path
@@ -661,6 +662,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--step", default="all", choices=("all", *STEPS))
     args = parser.parse_args(argv)
+    # yfinance triggers this pandas deprecation notice on every download.
+    warnings.filterwarnings("ignore", message="The inplace keyword")
     steps = STEPS if args.step == "all" else (args.step,)
 
     settings = load_settings()

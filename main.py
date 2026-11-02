@@ -15,6 +15,7 @@ import argparse
 import json
 import sys
 import tarfile
+import warnings
 from pathlib import Path
 from typing import Any, Sequence
 
@@ -143,6 +144,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--mode", choices=("file", "update", "full"), default="file")
     parser.add_argument("--pack", action="store_true")
     args = parser.parse_args(argv)
+    # yfinance triggers this pandas deprecation notice on every download.
+    warnings.filterwarnings("ignore", message="The inplace keyword")
     if args.pack:
         print(f"Archive: {pack_dataset()}")
         return 0

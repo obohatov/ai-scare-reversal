@@ -1,8 +1,10 @@
 # AI Scare Reversal
 
-Final project for the [Stock Markets Analytics Zoomcamp 2026](https://github.com/DataTalksClub/stock-markets-analytics-zoomcamp) by DataTalks.Club.
+Final project for the [Stock Markets Analytics Zoomcamp 2026](https://github.com/DataTalksClub/stock-markets-analytics-zoomcamp) by DataTalks.Club. An end-to-end system that detects sharp stock falls, scores them, simulates trading and runs daily.
 
-> **Status:** stage 8 of 9, automation. No strategy has been tested yet, and no result here claims profitability.
+> **Main result:** the strategy did not beat its benchmarks. Over the test period the primary strategy made 10.3% a year against 15.3% for SPY. Open price and news features could not separate falls that recover from falls that continue. AI-driven falls did slightly better than ordinary falls after 30 sessions, but 11 overlapping events cannot confirm it.
+
+This is a research project, not investment advice.
 
 ## Problem
 
@@ -12,17 +14,52 @@ New AI products have pushed whole groups of listed companies down within a day. 
 
 **Research question:** after a sharp fall relative to its sector, can a model tell which stocks will recover over the next 30 trading days, and do AI-driven falls behave like falls with no news or like falls with company news?
 
-## Planned approach
+The result would serve an investor deciding whether to buy after a scare or stay out. This differs from the course setup in three ways: it trades events instead of every day, measures stocks against their sector, and adds hand-labelled AI events.
 
-1. Build one table of daily data for S&P 500 members and European peers, 2010–2026.
-2. Find sharp falls relative to each stock's sector.
-3. Train Decision Tree, Random Forest and XGBoost models to predict whether a stock beats its sector over 30 trading days.
-4. Test on 2025–2026 with the stock list frozen at the end of 2024, which limits survivorship bias.
-5. Simulate strategies against the S&P 500. Idle capital stays in an S&P 500 ETF between signals.
-6. Analyse hand-labelled AI events as a separate slice of the test period. Labels are fixed before any later return is viewed.
-7. Automate the workflow with daily runs and trade notifications.
+## Results
 
-## Quick start
+The periods were separated in advance: train to 2022, validation 2023-2024, test from January 2025 to October 2026. Rules were fixed in [`reports/test_protocol.md`](reports/test_protocol.md) before the test period was opened once. [`notebooks/research.ipynb`](notebooks/research.ipynb) holds the tables and charts.
+
+| Strategy | Validation CAGR | Test CAGR | Test Sharpe | Test max drawdown |
+|---|---|---|---|---|
+| SPY | 25.8% | 15.3% | 0.93 | -18.8% |
+| Equal-weight S&P 500 | 14.2% | 15.5% | 1.02 | -15.7% |
+| **`no_news`, primary** | **12.0%** | **10.3%** | 0.56 | -17.9% |
+| `all_drops`, control | 7.1% | 8.1% | 0.47 | -19.0% |
+| `no_news_core_20` | 22.9% | 14.5% | 0.89 | -18.0% |
+| `news_spread`, long-short | -1.5% | 8.9% | 1.10 | -7.4% |
+| `no_news_stop_15` | 7.7% | 8.0% | 0.46 | -20.3% |
+| `no_news_5_positions` | 13.9% | 26.5% | 0.98 | -16.3% |
+| `top_score` | 3.4% | 19.1% | 1.09 | -18.8% |
+| Cash at Fed Funds | 5.2% | 4.0% | | |
+
+Sharpe ratios do not subtract the risk-free rate.
+
+- **No reversal on average.** Fallen stocks beat their sector 46.0% of the time in training and 44.9% in validation, against 46.8% on ordinary days.
+- **No model signal.** The best validation AUC was 0.509 at 30 sessions and 0.522 at 5 sessions, across 60 fits. Tuning stopped there, as declared.
+- **Savor's pattern is weak here.** Falls after earnings did worse than falls without company news in every period, but the gap was 0.27 points (standard error 0.40) on validation and 0.77 (0.48) on test.
+- **Do not read the best test rows as the strategy.** `no_news_5_positions` is the primary rule with 75 trades and high volatility, and its 10-position version made 10.3%. `top_score` made 20 trades, and its threshold came from an earlier fit of the model.
+- **`news_spread` deserves more study, nothing more.** It lost to cash on validation and beat it on test.
+
+### AI events
+
+| Group | Change against sector, 30 sessions |
+|---|---|
+| 11 AI events | +1.9% (standard error 1.9) |
+| 2,584 ordinary sharp falls | -0.9% |
+
+Seven of the 11 events beat their sector. The labels did not support the thesis that falls reverse when a product replaces no paid work: events labelled `no` changed -1.0%, `partly` +2.5% and `yes` +6.0%, from 3, 7 and 1 events. At 90 sessions the average rests on two cybersecurity events; the other nine average about -8%.
+
+## Limits
+
+- Yahoo serves no history for most acquired or bankrupt companies. Index members with prices cover about 72% of the 2010 index and about 97% of the end-2024 index, before symbol renames. Training leans towards survivors; the frozen test universe is much less affected.
+- AI events entered the list because stocks fell, so the sample cannot show how often similar announcements caused no fall.
+- Six of the 11 events fall within two weeks, so they are not independent. Tickers in `proposed_tickers` were chosen by sector, not from a source.
+- The list stops at March 2026 because later searches found no matching events, which does not prove there were none.
+- The simulation uses the next open and fixed costs. It ignores market impact, and the ETF sleeve moves close to close.
+- Page views start in July 2015 and cover current members and peers only. EDGAR history covers tickers that it can map today.
+
+## Reproduce
 
 Python 3.12 or newer is required.
 
@@ -30,124 +67,64 @@ Python 3.12 or newer is required.
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env    # fill in CONTACT_NAME and CONTACT_EMAIL
+cp .env.example .env    # add CONTACT_NAME, CONTACT_EMAIL and DATA_URL
 pytest
-python -m scripts.check_sources --label codespace
 ```
 
-The check writes `reports/source_check_<label>.md` and `.json`. Both are free of credentials and contact details.
+There are two ways to run it.
 
-To test one source on another machine, for example Yahoo on a server:
+**From the prepared file**, with no data calls. Set `DATA_URL` to the [shared dataset](https://drive.google.com/file/d/1cqTS1uVbbhd7WkchzR0qGluzyGH7DUI6/view?usp=sharing):
 
 ```bash
-python -m scripts.check_sources --label server --only host,universe,yahoo_prices
+python main.py --mode file
 ```
 
-## Build the dataset
+**From the sources:**
 
 ```bash
+python main.py --mode full
+```
+
+`notebooks/workflow.ipynb` shows the same run step by step. Each stage can also run alone:
+
+```bash
+python -m scripts.check_sources --label local
 python -m scripts.data_repo --step all
-```
-
-This writes `data/processed/panel.parquet`, with one row per ticker and trading day, and `reports/data_build.json`. A repeated run resumes from what is already saved. One step can be run alone with, for example, `--step prices`.
-
-## Build the features
-
-```bash
 python -m scripts.transform
-```
-
-This writes `data/processed/events.parquet`, with one row per sharp fall, plus `reports/feature_sets.json` and `reports/features_summary.json`.
-
-- **Event:** a daily return at least 2.5 standard deviations and 3 percentage points below the sector. Sector returns leave out the stock itself, and repeats within 5 sessions are ignored.
-- **Target:** whether the stock beats its sector from the next open to the close 30 sessions later.
-- **Splits:** train to 2022, validation 2023-2024, test from 2025, with a 45-day gap before each later period.
-- **Universe:** the main test uses S&P 500 members frozen at the end of 2024. European peers and event extras were chosen because of AI scares, so they are flagged and reported separately.
-
-## Explore and train
-
-```bash
 python -m scripts.eda
 python -m scripts.train
-```
-
-`scripts.eda` writes `reports/eda.json` from the training and validation periods. `scripts.train` compares logistic regression, Decision Tree, Random Forest and XGBoost on validation, then refits the chosen model on both periods to score the test period. Test metrics are not computed at this stage.
-
-The first model round found no signal at the 30-session horizon: validation AUC stayed near 0.5. One declared follow-up tests horizons of 5 and 10 sessions with the same features:
-
-```bash
 python -m scripts.horizon_check
-```
-
-No further tuning follows from this round, whatever it shows.
-
-## Simulate
-
-```bash
 python -m scripts.simulate
-```
-
-This compares strategies with holding SPY over the validation period and writes `reports/simulation_validation.json`. Capital stays in the index between trades. Positions enter at the next open, hold for 30 sessions and pay 0.1% per side. The report also holds an equal-weight index of S&P 500 members, a core-satellite version with 2% per position, and `news_spread`, a market-neutral book that buys falls without company news and shorts falls after earnings, paying a 1% yearly borrow cost. The test period stays closed until the strategies are fixed.
-
-## Open the test period
-
-The rules are fixed in `reports/test_protocol.md`.
-
-```bash
 python -m scripts.simulate --period test --confirm-frozen
 python -m scripts.ai_slice
 ```
 
-## Run the workflow
+## How it works
 
-```bash
-python main.py --mode file    # prepared dataset, set DATA_URL if data/ is empty
-python main.py --mode update  # download only new data, then trade on paper
-python main.py --mode full    # rebuild every source
-python main.py --pack         # write data/dataset.tar.gz for sharing
-```
-
-Each run ends with the newest signals under the frozen `no_news` rule. The `update` mode is scheduled on Railway through `railway.toml`, on weekdays at 22:30 UTC, and keeps its data on a volume set by `DATA_DIR`. Telegram and Alpaca steps run only when their keys are set, and Alpaca uses the paper endpoint only. The incremental price step rescales saved adjusted closes when a dividend or split changes them.
-
-## Data sources
-
-| Source | Purpose | Access |
-|---|---|---|
-| Yahoo Finance | Daily prices, benchmarks, earnings dates | `yfinance` |
-| FRED | Macro series | Public CSV endpoint |
-| Wikipedia | Current S&P 500 members and company names | Public page |
-| [fja05680/sp500](https://github.com/fja05680/sp500) | Historical S&P 500 membership since 1996 (MIT licence) | CSV pinned to one commit |
-| SEC EDGAR | 8-K filings as a firm-news flag | Free; clients declare a name and email |
-| Wikimedia | Daily page views as an attention signal | Free; clients declare a contact |
+1. **Data.** Yahoo prices since 2010, FRED macro series, S&P 500 history from [fja05680/sp500](https://github.com/fja05680/sp500), SEC EDGAR 8-K filings and Wikimedia page views, combined in `data/processed/panel.parquet`: 2.59 million rows and 681 tickers.
+2. **Events.** A daily return at least 2.5 standard deviations and 3 percentage points below the sector. Sector returns leave out the stock itself, and repeats within 5 sessions are ignored. This gave 17,957 events.
+3. **Features.** 38 numeric features and 5 dummy sets, described in [`docs/features.md`](docs/features.md). Every feature uses data from the close of the event day or earlier, and a test checks this.
+4. **Target.** Whether the stock beats its sector from the next open to the close 30 sessions later.
+5. **Models.** Logistic regression, Decision Tree, Random Forest and XGBoost, with 20 settings compared on validation.
+6. **Simulation.** Vector and exact versions, with up to 10 positions, reinvestment, 0.1% cost per side and capital held in SPY between trades.
+7. **Automation.** `python main.py --mode update` adds new data incrementally, finds signals, sends a Telegram message and places paper orders. `railway.toml` schedules it for weekdays at 22:30 UTC, with data on a volume set by `DATA_DIR`. Telegram and Alpaca run only when their keys are set, and Alpaca uses the paper endpoint only.
 
 ## Repository layout
 
 ```text
 .
-├── data/          # local only, never committed
-├── events/        # hand-labelled AI events
-├── notebooks/     # research notebooks
-├── reports/       # results and the test protocol
-├── main.py        # whole workflow
-├── scripts/
-│   ├── ai_slice.py
-│   ├── broker.py
-│   ├── check_sources.py
-│   ├── data_repo.py
-│   ├── eda.py
-│   ├── notify.py
-│   ├── settings.py
-│   ├── simulate.py
-│   ├── train.py
-│   ├── transform.py
-│   └── universe.py
+├── Dockerfile
+├── main.py          # whole workflow
+├── railway.toml     # cloud schedule
+├── data/            # local only, never committed
+├── docs/            # feature descriptions
+├── events/          # hand-labelled AI events
+├── notebooks/       # workflow and research
+├── reports/         # results and the test protocol
+├── scripts/         # one module per stage
 └── tests/
 ```
 
-## Known data limits
-
-Yahoo serves no history for most companies that were acquired or went bankrupt. Index members with prices cover about 72% of the 2010 index and about 97% of the end-2024 index, before symbol renames are applied. Training data therefore leans towards survivors, and the test period is much less affected.
-
 ## Data policy
 
-Data files stay out of Git. Reviewers will be able to download the prepared dataset from a shared drive link or rebuild it from the APIs.
+Data files stay out of Git. Reviewers can use the shared dataset link above or rebuild it from the APIs.
