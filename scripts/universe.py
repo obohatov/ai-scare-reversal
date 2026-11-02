@@ -42,6 +42,30 @@ EUROPEAN_PEERS = [
     "UBI.PA",
 ]
 
+# English Wikipedia titles for peers; redirects are resolved at download time.
+EUROPEAN_ARTICLES = {
+    "REL.L": "RELX",
+    "WKL.AS": "Wolters_Kluwer",
+    "TRI.TO": "Thomson_Reuters",
+    "LSEG.L": "London_Stock_Exchange_Group",
+    "EXPN.L": "Experian",
+    "INF.L": "Informa",
+    "PSON.L": "Pearson_plc",
+    "SAP.DE": "SAP",
+    "SGE.L": "Sage_Group",
+    "DSY.PA": "Dassault_Syst\u00e8mes",
+    "CAP.PA": "Capgemini",
+    "TEP.PA": "Teleperformance",
+    "PUB.PA": "Publicis",
+    "WPP.L": "WPP_plc",
+    "RAND.AS": "Randstad_NV",
+    "STJ.L": "St._James's_Place_plc",
+    "DSV.CO": "DSV_A/S",
+    "KNIN.SW": "Kuehne_+_Nagel",
+    "DHL.DE": "DHL_Group",
+    "UBI.PA": "Ubisoft",
+}
+
 # Used for the Wikimedia check: English Wikipedia article titles.
 SAMPLE_ARTICLES = ["RELX", "Wolters_Kluwer", "FactSet"]
 
@@ -49,4 +73,4 @@ SAMPLE_ARTICLES = ["RELX", "Wolters_Kluwer", "FactSet"]
 SAMPLE_US_FILERS = ["FDS", "SPGI", "CHRW"]
 SAMPLE_EARNINGS_TICKERS = ["FDS", "CHRW", "WKL.AS"]
 
-FRED_SERIES = ["DGS10", "DGS2", "VIXCLS"]
+FRED_SERIES = ["DGS10", "DGS2", "VIXCLS", "DFF", "BAMLH0A0HYM2"]

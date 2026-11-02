@@ -1,0 +1,13 @@
+{
+  "panel": {
+    "rows": 2542274,
+    "tickers": 667,
+    "first": "2010-01-04",
+    "last": "2026-11-02",
+    "in_sp500_rows": 1738093,
+    "unknown_sector_tickers": 18,
+    "rows_with_8k": 124913,
+    "rows_with_pageviews": 1307167,
+    "size_mb": 65.9
+  }
+}

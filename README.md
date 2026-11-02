@@ -2,7 +2,7 @@
 
 Final project for the [Stock Markets Analytics Zoomcamp 2026](https://github.com/DataTalksClub/stock-markets-analytics-zoomcamp) by DataTalks.Club.
 
-> **Status:** stage 1 of 9, data source check. No strategy has been tested yet, and no result here claims profitability.
+> **Status:** stage 2 of 9, data build. No strategy has been tested yet, and no result here claims profitability.
 
 ## Problem
 
@@ -43,13 +43,22 @@ To test one source on another machine, for example Yahoo on a server:
 python -m scripts.check_sources --label server --only host,universe,yahoo_prices
 ```
 
-## Data sources under test
+## Build the dataset
+
+```bash
+python -m scripts.data_repo --step all
+```
+
+This writes `data/processed/panel.parquet`, with one row per ticker and trading day, and `reports/data_build.json`. A repeated run resumes from what is already saved. One step can be run alone with, for example, `--step prices`.
+
+## Data sources
 
 | Source | Purpose | Access |
 |---|---|---|
 | Yahoo Finance | Daily prices, benchmarks, earnings dates | `yfinance` |
 | FRED | Macro series | Public CSV endpoint |
-| Wikipedia | S&P 500 members and date added | Public page |
+| Wikipedia | Current S&P 500 members and company names | Public page |
+| [fja05680/sp500](https://github.com/fja05680/sp500) | Historical S&P 500 membership since 1996 (MIT licence) | CSV pinned to one commit |
 | SEC EDGAR | 8-K filings as a firm-news flag | Free; clients declare a name and email |
 | Wikimedia | Daily page views as an attention signal | Free; clients declare a contact |
 
@@ -62,6 +71,7 @@ python -m scripts.check_sources --label server --only host,universe,yahoo_prices
 ├── reports/       # source check reports
 ├── scripts/
 │   ├── check_sources.py
+│   ├── data_repo.py
 │   ├── settings.py
 │   └── universe.py
 └── tests/
