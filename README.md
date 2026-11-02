@@ -2,7 +2,7 @@
 
 Final project for the [Stock Markets Analytics Zoomcamp 2026](https://github.com/DataTalksClub/stock-markets-analytics-zoomcamp) by DataTalks.Club.
 
-> **Status:** stage 5 of 9, models. No strategy has been tested yet, and no result here claims profitability.
+> **Status:** stage 6 of 9, simulation. No strategy has been tested yet, and no result here claims profitability.
 
 ## Problem
 
@@ -81,6 +81,14 @@ python -m scripts.horizon_check
 
 No further tuning follows from this round, whatever it shows.
 
+## Simulate
+
+```bash
+python -m scripts.simulate
+```
+
+This compares strategies with holding SPY over the validation period and writes `reports/simulation_validation.json`. Capital stays in the index between trades. Positions enter at the next open, hold for 30 sessions and pay 0.1% per side. The test period stays closed until the strategies are fixed.
+
 ## Data sources
 
 | Source | Purpose | Access |
@@ -105,6 +113,7 @@ No further tuning follows from this round, whatever it shows.
 │   ├── data_repo.py
 │   ├── eda.py
 │   ├── settings.py
+│   ├── simulate.py
 │   ├── train.py
 │   ├── transform.py
 │   └── universe.py
