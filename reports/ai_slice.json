@@ -1,0 +1,454 @@
+{
+  "30": {
+    "all_events": {
+      "events": 11,
+      "mean": 1.0189,
+      "std_error": 0.0188
+    },
+    "by_label": {
+      "substitutes_paid_workflow": {
+        "no": {
+          "events": 3,
+          "mean": 0.9902,
+          "std_error": 0.0296
+        },
+        "partly": {
+          "events": 7,
+          "mean": 1.0252,
+          "std_error": 0.0264
+        },
+        "yes": {
+          "events": 1,
+          "mean": 1.0603,
+          "std_error": null
+        }
+      },
+      "depends_on_proprietary_data": {
+        "partly": {
+          "events": 10,
+          "mean": 1.0264,
+          "std_error": 0.0191
+        },
+        "yes": {
+          "events": 1,
+          "mean": 0.9437,
+          "std_error": null
+        }
+      },
+      "product_status": {
+        "announced": {
+          "events": 1,
+          "mean": 0.909,
+          "std_error": null
+        },
+        "leak": {
+          "events": 1,
+          "mean": 1.0453,
+          "std_error": null
+        },
+        "none": {
+          "events": 1,
+          "mean": 0.9818,
+          "std_error": null
+        },
+        "preview": {
+          "events": 2,
+          "mean": 1.0002,
+          "std_error": 0.0566
+        },
+        "shipped": {
+          "events": 6,
+          "mean": 1.0452,
+          "std_error": 0.0213
+        }
+      }
+    },
+    "comparison_sharp_falls": {
+      "events": 2584,
+      "mean_rel_growth": 0.9908,
+      "share_beating_sector": 0.4613
+    },
+    "events": [
+      {
+        "event_id": "E01",
+        "event_date": "2023-05-02",
+        "group": "Online education",
+        "stocks": 2,
+        "measured": 2,
+        "sharp_fall_stocks": 2,
+        "mean_rel_growth": 1.0603,
+        "share_beating_sector": 1.0,
+        "mean_excess_vs_index": 0.0024,
+        "substitutes_paid_workflow": "yes",
+        "depends_on_proprietary_data": "partly",
+        "product_status": "shipped"
+      },
+      {
+        "event_id": "E02",
+        "event_date": "2025-09-30",
+        "group": "Front-office application software",
+        "stocks": 2,
+        "measured": 2,
+        "sharp_fall_stocks": 1,
+        "mean_rel_growth": 0.909,
+        "share_beating_sector": 0.5,
+        "mean_excess_vs_index": -0.088,
+        "substitutes_paid_workflow": "partly",
+        "depends_on_proprietary_data": "partly",
+        "product_status": "announced"
+      },
+      {
+        "event_id": "E03",
+        "event_date": "2026-01-30",
+        "group": "Gaming",
+        "stocks": 4,
+        "measured": 3,
+        "sharp_fall_stocks": 2,
+        "mean_rel_growth": 0.9437,
+        "share_beating_sector": 0.0,
+        "mean_excess_vs_index": -0.0629,
+        "substitutes_paid_workflow": "no",
+        "depends_on_proprietary_data": "yes",
+        "product_status": "preview"
+      },
+      {
+        "event_id": "E04",
+        "event_date": "2026-02-03",
+        "group": "Legal technology and information services",
+        "stocks": 4,
+        "measured": 4,
+        "sharp_fall_stocks": 4,
+        "mean_rel_growth": 1.1041,
+        "share_beating_sector": 1.0,
+        "mean_excess_vs_index": 0.0709,
+        "substitutes_paid_workflow": "partly",
+        "depends_on_proprietary_data": "partly",
+        "product_status": "shipped"
+      },
+      {
+        "event_id": "E05",
+        "event_date": "2026-02-09",
+        "group": "Insurance brokers",
+        "stocks": 5,
+        "measured": 5,
+        "sharp_fall_stocks": 4,
+        "mean_rel_growth": 1.0726,
+        "share_beating_sector": 1.0,
+        "mean_excess_vs_index": 0.0377,
+        "substitutes_paid_workflow": "partly",
+        "depends_on_proprietary_data": "partly",
+        "product_status": "shipped"
+      },
+      {
+        "event_id": "E06",
+        "event_date": "2026-02-10",
+        "group": "Wealth managers",
+        "stocks": 3,
+        "measured": 3,
+        "sharp_fall_stocks": 3,
+        "mean_rel_growth": 0.9581,
+        "share_beating_sector": 0.3333,
+        "mean_excess_vs_index": -0.0479,
+        "substitutes_paid_workflow": "partly",
+        "depends_on_proprietary_data": "partly",
+        "product_status": "shipped"
+      },
+      {
+        "event_id": "E07",
+        "event_date": "2026-02-11",
+        "group": "Property managers and office REITs",
+        "stocks": 2,
+        "measured": 2,
+        "sharp_fall_stocks": 2,
+        "mean_rel_growth": 0.9818,
+        "share_beating_sector": 0.5,
+        "mean_excess_vs_index": -0.0067,
+        "substitutes_paid_workflow": "no",
+        "depends_on_proprietary_data": "partly",
+        "product_status": "none"
+      },
+      {
+        "event_id": "E08",
+        "event_date": "2026-02-12",
+        "group": "Freight logistics",
+        "stocks": 7,
+        "measured": 7,
+        "sharp_fall_stocks": 2,
+        "mean_rel_growth": 1.0655,
+        "share_beating_sector": 1.0,
+        "mean_excess_vs_index": 0.041,
+        "substitutes_paid_workflow": "partly",
+        "depends_on_proprietary_data": "partly",
+        "product_status": "shipped"
+      },
+      {
+        "event_id": "E09",
+        "event_date": "2026-02-20",
+        "group": "Cybersecurity",
+        "stocks": 3,
+        "measured": 3,
+        "sharp_fall_stocks": 1,
+        "mean_rel_growth": 1.0568,
+        "share_beating_sector": 0.6667,
+        "mean_excess_vs_index": 0.0918,
+        "substitutes_paid_workflow": "partly",
+        "depends_on_proprietary_data": "partly",
+        "product_status": "preview"
+      },
+      {
+        "event_id": "E10",
+        "event_date": "2026-02-23",
+        "group": "IT services and legacy systems",
+        "stocks": 1,
+        "measured": 1,
+        "sharp_fall_stocks": true,
+        "mean_rel_growth": 1.0104,
+        "share_beating_sector": 1.0,
+        "mean_excess_vs_index": 0.0678,
+        "substitutes_paid_workflow": "partly",
+        "depends_on_proprietary_data": "partly",
+        "product_status": "shipped"
+      },
+      {
+        "event_id": "E11",
+        "event_date": "2026-03-27",
+        "group": "Cybersecurity",
+        "stocks": 7,
+        "measured": 7,
+        "sharp_fall_stocks": 1,
+        "mean_rel_growth": 1.0453,
+        "share_beating_sector": 0.7143,
+        "mean_excess_vs_index": 0.1023,
+        "substitutes_paid_workflow": "no",
+        "depends_on_proprietary_data": "partly",
+        "product_status": "leak"
+      }
+    ]
+  },
+  "90": {
+    "all_events": {
+      "events": 11,
+      "mean": 1.0194,
+      "std_error": 0.0752
+    },
+    "by_label": {
+      "substitutes_paid_workflow": {
+        "no": {
+          "events": 3,
+          "mean": 1.0828,
+          "std_error": 0.1949
+        },
+        "partly": {
+          "events": 7,
+          "mean": 0.9802,
+          "std_error": 0.093
+        },
+        "yes": {
+          "events": 1,
+          "mean": 1.1038,
+          "std_error": null
+        }
+      },
+      "depends_on_proprietary_data": {
+        "partly": {
+          "events": 10,
+          "mean": 1.0302,
+          "std_error": 0.0822
+        },
+        "yes": {
+          "events": 1,
+          "mean": 0.9115,
+          "std_error": null
+        }
+      },
+      "product_status": {
+        "announced": {
+          "events": 1,
+          "mean": 0.6249,
+          "std_error": null
+        },
+        "leak": {
+          "events": 1,
+          "mean": 1.4716,
+          "std_error": null
+        },
+        "none": {
+          "events": 1,
+          "mean": 0.8653,
+          "std_error": null
+        },
+        "preview": {
+          "events": 2,
+          "mean": 1.1781,
+          "std_error": 0.2666
+        },
+        "shipped": {
+          "events": 6,
+          "mean": 0.9825,
+          "std_error": 0.035
+        }
+      }
+    },
+    "comparison_sharp_falls": {
+      "events": 2339,
+      "mean_rel_growth": 0.9576,
+      "share_beating_sector": 0.4019
+    },
+    "events": [
+      {
+        "event_id": "E01",
+        "event_date": "2023-05-02",
+        "group": "Online education",
+        "stocks": 2,
+        "measured": 2,
+        "sharp_fall_stocks": 2,
+        "mean_rel_growth": 1.1038,
+        "share_beating_sector": 1.0,
+        "mean_excess_vs_index": 0.0105,
+        "substitutes_paid_workflow": "yes",
+        "depends_on_proprietary_data": "partly",
+        "product_status": "shipped"
+      },
+      {
+        "event_id": "E02",
+        "event_date": "2025-09-30",
+        "group": "Front-office application software",
+        "stocks": 2,
+        "measured": 2,
+        "sharp_fall_stocks": 1,
+        "mean_rel_growth": 0.6249,
+        "share_beating_sector": 0.0,
+        "mean_excess_vs_index": -0.3869,
+        "substitutes_paid_workflow": "partly",
+        "depends_on_proprietary_data": "partly",
+        "product_status": "announced"
+      },
+      {
+        "event_id": "E03",
+        "event_date": "2026-01-30",
+        "group": "Gaming",
+        "stocks": 4,
+        "measured": 3,
+        "sharp_fall_stocks": 2,
+        "mean_rel_growth": 0.9115,
+        "share_beating_sector": 0.3333,
+        "mean_excess_vs_index": -0.1717,
+        "substitutes_paid_workflow": "no",
+        "depends_on_proprietary_data": "yes",
+        "product_status": "preview"
+      },
+      {
+        "event_id": "E04",
+        "event_date": "2026-02-03",
+        "group": "Legal technology and information services",
+        "stocks": 4,
+        "measured": 4,
+        "sharp_fall_stocks": 4,
+        "mean_rel_growth": 0.9402,
+        "share_beating_sector": 0.5,
+        "mean_excess_vs_index": -0.0904,
+        "substitutes_paid_workflow": "partly",
+        "depends_on_proprietary_data": "partly",
+        "product_status": "shipped"
+      },
+      {
+        "event_id": "E05",
+        "event_date": "2026-02-09",
+        "group": "Insurance brokers",
+        "stocks": 5,
+        "measured": 5,
+        "sharp_fall_stocks": 4,
+        "mean_rel_growth": 0.9094,
+        "share_beating_sector": 0.0,
+        "mean_excess_vs_index": -0.1565,
+        "substitutes_paid_workflow": "partly",
+        "depends_on_proprietary_data": "partly",
+        "product_status": "shipped"
+      },
+      {
+        "event_id": "E06",
+        "event_date": "2026-02-10",
+        "group": "Wealth managers",
+        "stocks": 3,
+        "measured": 3,
+        "sharp_fall_stocks": 3,
+        "mean_rel_growth": 0.881,
+        "share_beating_sector": 0.0,
+        "mean_excess_vs_index": -0.1614,
+        "substitutes_paid_workflow": "partly",
+        "depends_on_proprietary_data": "partly",
+        "product_status": "shipped"
+      },
+      {
+        "event_id": "E07",
+        "event_date": "2026-02-11",
+        "group": "Property managers and office REITs",
+        "stocks": 2,
+        "measured": 2,
+        "sharp_fall_stocks": 2,
+        "mean_rel_growth": 0.8653,
+        "share_beating_sector": 0.0,
+        "mean_excess_vs_index": -0.1348,
+        "substitutes_paid_workflow": "no",
+        "depends_on_proprietary_data": "partly",
+        "product_status": "none"
+      },
+      {
+        "event_id": "E08",
+        "event_date": "2026-02-12",
+        "group": "Freight logistics",
+        "stocks": 7,
+        "measured": 7,
+        "sharp_fall_stocks": 2,
+        "mean_rel_growth": 1.033,
+        "share_beating_sector": 0.7143,
+        "mean_excess_vs_index": 0.061,
+        "substitutes_paid_workflow": "partly",
+        "depends_on_proprietary_data": "partly",
+        "product_status": "shipped"
+      },
+      {
+        "event_id": "E09",
+        "event_date": "2026-02-20",
+        "group": "Cybersecurity",
+        "stocks": 3,
+        "measured": 3,
+        "sharp_fall_stocks": 1,
+        "mean_rel_growth": 1.4447,
+        "share_beating_sector": 0.6667,
+        "mean_excess_vs_index": 0.6832,
+        "substitutes_paid_workflow": "partly",
+        "depends_on_proprietary_data": "partly",
+        "product_status": "preview"
+      },
+      {
+        "event_id": "E10",
+        "event_date": "2026-02-23",
+        "group": "IT services and legacy systems",
+        "stocks": 1,
+        "measured": 1,
+        "sharp_fall_stocks": true,
+        "mean_rel_growth": 1.0279,
+        "share_beating_sector": 1.0,
+        "mean_excess_vs_index": 0.2177,
+        "substitutes_paid_workflow": "partly",
+        "depends_on_proprietary_data": "partly",
+        "product_status": "shipped"
+      },
+      {
+        "event_id": "E11",
+        "event_date": "2026-03-27",
+        "group": "Cybersecurity",
+        "stocks": 7,
+        "measured": 7,
+        "sharp_fall_stocks": 1,
+        "mean_rel_growth": 1.4716,
+        "share_beating_sector": 0.8571,
+        "mean_excess_vs_index": 0.8187,
+        "substitutes_paid_workflow": "no",
+        "depends_on_proprietary_data": "partly",
+        "product_status": "leak"
+      }
+    ]
+  }
+}

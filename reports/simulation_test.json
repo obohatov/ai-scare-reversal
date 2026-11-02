@@ -1,0 +1,217 @@
+{
+  "period": "test",
+  "first": "2025-01-06",
+  "last": "2026-10-30",
+  "events": 2890,
+  "score_threshold": 0.4892,
+  "index": {
+    "cagr": 0.1532,
+    "volatility": 0.1685,
+    "sharpe": 0.93,
+    "max_drawdown": -0.1876,
+    "final_equity": 129429.0
+  },
+  "equal_weight_index": {
+    "cagr": 0.1546,
+    "volatility": 0.1518,
+    "sharpe": 1.022,
+    "max_drawdown": -0.1574,
+    "final_equity": 129701.0
+  },
+  "cash": {
+    "cagr": 0.0404,
+    "volatility": 0.0002,
+    "sharpe": 199.609,
+    "max_drawdown": 0.0,
+    "final_equity": 107436.0
+  },
+  "strategies": {
+    "all_drops": {
+      "config": {
+        "name": "all_drops",
+        "rule": "all_drops",
+        "max_positions": 10,
+        "stop_loss": null,
+        "position_share": null
+      },
+      "signals": 2890,
+      "vector": {
+        "trades": 2634,
+        "mean_net_return": 0.0136,
+        "median_net_return": 0.009,
+        "win_rate": 0.5364,
+        "mean_excess_vs_index": -0.0015,
+        "share_beating_index": 0.4681
+      },
+      "exact": {
+        "trades": 150,
+        "stopped_out": 0,
+        "average_positions": 9.51,
+        "cagr": 0.0813,
+        "volatility": 0.2174,
+        "sharpe": 0.466,
+        "max_drawdown": -0.1898,
+        "final_equity": 115163.0
+      }
+    },
+    "no_news": {
+      "config": {
+        "name": "no_news",
+        "rule": "no_news",
+        "max_positions": 10,
+        "stop_loss": null,
+        "position_share": null
+      },
+      "signals": 1836,
+      "vector": {
+        "trades": 1650,
+        "mean_net_return": 0.0185,
+        "median_net_return": 0.0135,
+        "win_rate": 0.5527,
+        "mean_excess_vs_index": 0.0021,
+        "share_beating_index": 0.4855
+      },
+      "exact": {
+        "trades": 150,
+        "stopped_out": 0,
+        "average_positions": 9.44,
+        "cagr": 0.1029,
+        "volatility": 0.2164,
+        "sharpe": 0.559,
+        "max_drawdown": -0.1793,
+        "final_equity": 119371.0
+      }
+    },
+    "no_news_5_positions": {
+      "config": {
+        "name": "no_news_5_positions",
+        "rule": "no_news",
+        "max_positions": 5,
+        "stop_loss": null,
+        "position_share": null
+      },
+      "signals": 1836,
+      "vector": {
+        "trades": 1650,
+        "mean_net_return": 0.0185,
+        "median_net_return": 0.0135,
+        "win_rate": 0.5527,
+        "mean_excess_vs_index": 0.0021,
+        "share_beating_index": 0.4855
+      },
+      "exact": {
+        "trades": 75,
+        "stopped_out": 0,
+        "average_positions": 4.74,
+        "cagr": 0.2645,
+        "volatility": 0.2764,
+        "sharpe": 0.983,
+        "max_drawdown": -0.163,
+        "final_equity": 152867.0
+      }
+    },
+    "no_news_stop_15": {
+      "config": {
+        "name": "no_news_stop_15",
+        "rule": "no_news",
+        "max_positions": 10,
+        "stop_loss": 0.15,
+        "position_share": null
+      },
+      "signals": 1836,
+      "vector": {
+        "trades": 1650,
+        "mean_net_return": 0.0185,
+        "median_net_return": 0.0135,
+        "win_rate": 0.5527,
+        "mean_excess_vs_index": 0.0021,
+        "share_beating_index": 0.4855
+      },
+      "exact": {
+        "trades": 163,
+        "stopped_out": 24,
+        "average_positions": 9.48,
+        "cagr": 0.0802,
+        "volatility": 0.2189,
+        "sharpe": 0.46,
+        "max_drawdown": -0.2026,
+        "final_equity": 114964.0
+      }
+    },
+    "no_news_core_20": {
+      "config": {
+        "name": "no_news_core_20",
+        "rule": "no_news",
+        "max_positions": 10,
+        "stop_loss": null,
+        "position_share": 0.02
+      },
+      "signals": 1836,
+      "vector": {
+        "trades": 1650,
+        "mean_net_return": 0.0185,
+        "median_net_return": 0.0135,
+        "win_rate": 0.5527,
+        "mean_excess_vs_index": 0.0021,
+        "share_beating_index": 0.4855
+      },
+      "exact": {
+        "trades": 150,
+        "stopped_out": 0,
+        "average_positions": 9.44,
+        "cagr": 0.1451,
+        "volatility": 0.1689,
+        "sharpe": 0.886,
+        "max_drawdown": -0.18,
+        "final_equity": 127754.0
+      }
+    },
+    "top_score": {
+      "config": {
+        "name": "top_score",
+        "rule": "top_score",
+        "max_positions": 10,
+        "stop_loss": null,
+        "position_share": null
+      },
+      "signals": 132,
+      "vector": {
+        "trades": 132,
+        "mean_net_return": 0.0655,
+        "median_net_return": 0.0518,
+        "win_rate": 0.7803,
+        "mean_excess_vs_index": 0.0286,
+        "share_beating_index": 0.5682
+      },
+      "exact": {
+        "trades": 20,
+        "stopped_out": 0,
+        "average_positions": 1.31,
+        "cagr": 0.1906,
+        "volatility": 0.1731,
+        "sharpe": 1.094,
+        "max_drawdown": -0.1876,
+        "final_equity": 137096.0
+      }
+    }
+  },
+  "news_spread": {
+    "gap": {
+      "long_events": 1650,
+      "short_events": 773,
+      "long_mean_rel_growth": 0.991,
+      "short_mean_rel_growth": 0.9834,
+      "mean_gap": 0.0077,
+      "std_error": 0.0048
+    },
+    "exact": {
+      "long_trades": 150,
+      "short_trades": 133,
+      "cagr": 0.0885,
+      "volatility": 0.0798,
+      "sharpe": 1.103,
+      "max_drawdown": -0.0743,
+      "final_equity": 116607.0
+    }
+  }
+}
