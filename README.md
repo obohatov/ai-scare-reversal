@@ -87,7 +87,7 @@ No further tuning follows from this round, whatever it shows.
 python -m scripts.simulate
 ```
 
-This compares strategies with holding SPY over the validation period and writes `reports/simulation_validation.json`. Capital stays in the index between trades. Positions enter at the next open, hold for 30 sessions and pay 0.1% per side. The test period stays closed until the strategies are fixed.
+This compares strategies with holding SPY over the validation period and writes `reports/simulation_validation.json`. Capital stays in the index between trades. Positions enter at the next open, hold for 30 sessions and pay 0.1% per side. The report also holds an equal-weight index of S&P 500 members, a core-satellite version with 2% per position, and `news_spread`, a market-neutral book that buys falls without company news and shorts falls after earnings, paying a 1% yearly borrow cost. The test period stays closed until the strategies are fixed.
 
 ## Data sources
 

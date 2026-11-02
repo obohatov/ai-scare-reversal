@@ -124,7 +124,10 @@ def test_performance_on_a_known_curve() -> None:
 def test_run_reads_saved_files_end_to_end(monkeypatch, tmp_path) -> None:
     dates = pd.bdate_range("2023-01-02", periods=60)
     panel = pd.concat(
-        pd.DataFrame({"date": dates, "ticker": ticker, "adj_close": 100.0 + index})
+        pd.DataFrame(
+            {"date": dates, "ticker": ticker, "adj_close": 100.0 + index,
+             "in_sp500": True, "dff": 5.0}
+        )
         for index, ticker in enumerate(["SPY", "AAA"])
     )
     panel_path, events_path, scores_path = (
@@ -132,7 +135,9 @@ def test_run_reads_saved_files_end_to_end(monkeypatch, tmp_path) -> None:
     )
     panel.to_parquet(panel_path)
     event = signal(date=dates[5], exit_date=dates[40], entry_open=101.0)
-    event.update(split="validation", in_sp500=True, in_frozen_universe=True)
+    event.update(
+        split="validation", in_sp500=True, in_frozen_universe=True, rel_growth_30d=1.02
+    )
     pd.DataFrame([event]).drop(columns=["score"]).to_parquet(events_path)
     pd.DataFrame([event])[["date", "ticker", "score"]].to_parquet(scores_path)
     monkeypatch.setattr(sm, "PANEL_PATH", panel_path)
@@ -141,6 +146,75 @@ def test_run_reads_saved_files_end_to_end(monkeypatch, tmp_path) -> None:
     report = sm.run("validation")
     assert report["events"] == 1
     assert report["strategies"]["no_news"]["exact"]["trades"] == 1
+
+
+def test_core_position_uses_a_fixed_share_of_equity() -> None:
+    prices = make_prices([10.0, 10.0, 11.0, 11.0, 11.0, 11.0, 11.0, 11.0])
+    strategy = sm.Strategy("x", "all_drops", position_share=0.02)
+    equity, _ = sm.exact_equity(pd.DataFrame([signal()]), prices, strategy, horizon=3)
+    start = 100_000 * (1 - sm.ETF_FEE)
+    size = start * 0.02
+    sold = (size * fee_net() / 10.0) * 11.0 * fee_net()
+    assert equity.iloc[-1] == pytest.approx(start - size + sold)
+
+
+def test_spread_short_gains_when_the_price_falls() -> None:
+    prices = make_prices([10.0, 10.0, 8.0, 8.0, 8.0, 8.0, 8.0, 8.0])
+    shorts = pd.DataFrame([signal()])
+    rates = pd.Series(0.0, index=DATES)
+    equity, stats = sm.spread_equity(shorts.iloc[0:0], shorts, prices, rates, side_positions=1, horizon=3)
+    size = 50_000.0
+    fees = size * sm.STOCK_FEE + 0.8 * size * sm.STOCK_FEE
+    borrow = 0.8 * size * sm.SHORT_BORROW_RATE / sm.TRADING_DAYS * 2 + size * sm.SHORT_BORROW_RATE / sm.TRADING_DAYS
+    assert stats == {"long_trades": 0, "short_trades": 1}
+    assert equity.iloc[-1] == pytest.approx(100_000 + 0.2 * size - fees - borrow)
+
+
+def test_spread_earns_interest_on_idle_cash() -> None:
+    frame = pd.DataFrame([signal()]).iloc[0:0]
+    rates = pd.Series(25.2, index=DATES)
+    equity, _ = sm.spread_equity(frame, frame, make_prices(), rates)
+    assert equity.iloc[0] == pytest.approx(100_100.0)
+
+
+def test_spread_signals_split_news_groups() -> None:
+    frame = pd.DataFrame(
+        [
+            signal("AAA"),
+            signal("BBB", has_8k_2d=1.0, has_earnings_2d=1.0),
+            signal("CCC", has_8k_2d=1.0),
+        ]
+    )
+    longs, shorts = sm.spread_signals(frame)
+    assert longs["ticker"].tolist() == ["AAA"]
+    assert shorts["ticker"].tolist() == ["BBB"]
+
+
+def test_spread_gap_reports_difference_and_error() -> None:
+    longs = pd.DataFrame({"rel_growth_30d": [1.02, 1.04]})
+    shorts = pd.DataFrame({"rel_growth_30d": [0.98, 1.00]})
+    result = sm.spread_gap(longs, shorts)
+    assert result["mean_gap"] == pytest.approx(0.04)
+    assert result["std_error"] > 0
+
+
+def test_equal_weight_curve_averages_members_only() -> None:
+    dates = DATES[:2]
+    panel = pd.DataFrame(
+        {
+            "date": list(dates) * 3,
+            "ticker": ["A", "A", "B", "B", "C", "C"],
+            "adj_close": [10.0, 11.0, 10.0, 13.0, 10.0, 20.0],
+            "in_sp500": [True, True, True, True, False, False],
+        }
+    )
+    curve = sm.equal_weight_curve(panel, dates)
+    assert curve.iloc[-1] == pytest.approx(120_000.0)
+
+
+def test_cash_curve_compounds_the_rate() -> None:
+    curve = sm.cash_curve(pd.Series(25.2, index=DATES[:2]), DATES[:2])
+    assert curve.iloc[-1] == pytest.approx(100_100.0)
 
 
 def test_test_period_needs_explicit_confirmation() -> None:
