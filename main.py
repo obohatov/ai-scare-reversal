@@ -39,7 +39,7 @@ def restore_dataset(url: str) -> None:
     import gdown
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
-    gdown.download(url, str(ARCHIVE_PATH), quiet=False, fuzzy=True)
+    gdown.download(url, str(ARCHIVE_PATH), quiet=False)
     with tarfile.open(ARCHIVE_PATH) as archive:
         archive.extractall(DATA_DIR, filter="data")
 

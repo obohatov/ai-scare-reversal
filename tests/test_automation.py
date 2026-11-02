@@ -156,6 +156,26 @@ def test_pack_and_restore_round_trip(monkeypatch, tmp_path) -> None:
     assert app.pack_dataset().exists()
 
 
+def test_restore_calls_gdown_with_arguments_it_accepts(monkeypatch, tmp_path) -> None:
+    import inspect
+
+    import gdown
+
+    seen = {}
+    signature = inspect.signature(gdown.download)
+
+    def fake_download(*args, **kwargs):
+        seen["bound"] = signature.bind(*args, **kwargs)
+        raise RuntimeError("stop after the call")
+
+    monkeypatch.setattr(gdown, "download", fake_download)
+    monkeypatch.setattr(app.data_repo, "PANEL_PATH", tmp_path / "none.parquet")
+    monkeypatch.setattr(app, "DATA_DIR", tmp_path)
+    with pytest.raises(RuntimeError, match="stop after the call"):
+        app.restore_dataset("https://example.org/file")
+    assert "bound" in seen
+
+
 def test_restore_explains_a_missing_link(monkeypatch, tmp_path) -> None:
     monkeypatch.setattr(app.data_repo, "PANEL_PATH", tmp_path / "none.parquet")
     with pytest.raises(RuntimeError, match="DATA_URL"):
