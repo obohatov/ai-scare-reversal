@@ -73,6 +73,14 @@ python -m scripts.train
 
 `scripts.eda` writes `reports/eda.json` from the training and validation periods. `scripts.train` compares logistic regression, Decision Tree, Random Forest and XGBoost on validation, then refits the chosen model on both periods to score the test period. Test metrics are not computed at this stage.
 
+The first model round found no signal at the 30-session horizon: validation AUC stayed near 0.5. One declared follow-up tests horizons of 5 and 10 sessions with the same features:
+
+```bash
+python -m scripts.horizon_check
+```
+
+No further tuning follows from this round, whatever it shows.
+
 ## Data sources
 
 | Source | Purpose | Access |

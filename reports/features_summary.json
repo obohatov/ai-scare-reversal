@@ -31,7 +31,7 @@
   "test_frozen_universe_events": 2890,
   "has_8k_known_share": 0.929,
   "pageviews_known_share": 0.647,
-  "numeric_features": 39,
+  "numeric_features": 38,
   "ordinary_days": {
     "train": {
       "days": 1289025,

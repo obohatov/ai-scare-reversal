@@ -51,7 +51,7 @@ NUMERIC = [
     "events_past_252", "sessions_since_event",
     "has_8k_2d", "has_earnings_2d",
     "pageviews_ratio_60",
-    "dgs10", "dgs2", "vixcls", "dff", "bamlh0a0hym2",
+    "dgs10", "dgs2", "vixcls", "dff",
     "yield_curve", "vix_change_5d",
 ]
 

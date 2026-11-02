@@ -45,7 +45,6 @@ def make_panel(sessions: int = 520, drop: float = 0.15) -> pd.DataFrame:
                     "dgs2": 3.0,
                     "vixcls": 18.0,
                     "dff": 3.0,
-                    "bamlh0a0hym2": 3.0,
                 }
             )
         )
@@ -104,6 +103,17 @@ def test_target_runs_from_next_open_to_the_exit_close() -> None:
     expected = stock.loc[position + 31, "adj_close"] / stock.loc[position + 1, "open"]
     assert row["growth_30d"] == pytest.approx(expected)
     assert row["exit_date"] == stock.loc[position + 31, "date"]
+
+
+def test_target_accepts_a_shorter_horizon() -> None:
+    panel = make_panel()
+    daily = tf.build_daily(panel, set(TICKERS), set(TICKERS), TODAY)
+    short = tf.add_target(daily.copy(), horizon=5)
+    row = short[(short["ticker"] == "T1")].iloc[100]
+    stock = panel[panel["ticker"] == "T1"].reset_index(drop=True)
+    position = stock.index[stock["date"] == row["date"]][0]
+    expected = stock.loc[position + 6, "adj_close"] / stock.loc[position + 1, "open"]
+    assert row["growth_30d"] == pytest.approx(expected)
 
 
 def test_target_is_empty_without_enough_future() -> None:
