@@ -41,7 +41,14 @@ from scripts.check_sources import (
     to_yahoo_symbol,
 )
 from scripts.settings import PROJECT_ROOT, Settings, load_settings
-from scripts.universe import BENCHMARKS, EUROPEAN_ARTICLES, EUROPEAN_PEERS, FRED_SERIES
+from scripts.universe import (
+    AI_EVENT_EXTRAS,
+    BENCHMARKS,
+    EUROPEAN_ARTICLES,
+    EUROPEAN_PEERS,
+    FRED_SERIES,
+    TICKER_RENAMES,
+)
 
 DATA_DIR = PROJECT_ROOT / "data"
 RAW_DIR = DATA_DIR / "raw"
@@ -98,7 +105,8 @@ def parse_membership(text: str, start: str = PRICE_START) -> pd.DataFrame:
     first_date = before.max() if not before.empty else frame["date"].min()
     frame = frame[frame["date"] >= first_date]
     long = frame.assign(ticker=frame["tickers"].str.split(",")).explode("ticker")
-    long["ticker"] = long["ticker"].map(to_yahoo_symbol)
+    long["ticker"] = long["ticker"].map(to_yahoo_symbol).replace(TICKER_RENAMES)
+    long = long.drop_duplicates(["date", "ticker"])
     return long[["date", "ticker"]].reset_index(drop=True)
 
 
@@ -276,8 +284,10 @@ def load_constituents(session: requests.Session, settings: Settings) -> pd.DataF
 
 
 def stock_tickers(membership: pd.DataFrame) -> list[str]:
-    """Everyone in the index since the start date, plus European peers."""
-    return sorted(set(membership["ticker"])) + EUROPEAN_PEERS
+    """Index members since the start date, European peers and event names."""
+    members = set(membership["ticker"])
+    extras = [ticker for ticker in AI_EVENT_EXTRAS if ticker not in members]
+    return sorted(members) + extras + EUROPEAN_PEERS
 
 
 def fetch_prices(

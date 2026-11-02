@@ -28,6 +28,12 @@ def test_parse_membership_keeps_last_snapshot_before_start() -> None:
     assert membership["date"].min() == pd.Timestamp("2009-12-01")
 
 
+def test_parse_membership_applies_renames_without_duplicates() -> None:
+    text = 'date,tickers\n2024-01-02,"MMC,MRSH,AAA"\n'
+    membership = dr.parse_membership(text, start="2024-01-01")
+    assert sorted(membership["ticker"]) == ["AAA", "MRSH"]
+
+
 def test_membership_flags_show_entry_and_exit() -> None:
     membership = dr.parse_membership(MEMBERSHIP_CSV, start="2010-01-01")
     dates = pd.DatetimeIndex(["2010-01-04", "2024-06-03", "2026-01-05"])
@@ -154,6 +160,15 @@ def test_build_panel_combines_sources_without_duplicates() -> None:
     assert set(panel.loc[panel["ticker"] == "REL.L", "sector"]) == {"Unknown"}
     assert panel["has_8k"].sum() == 1
     assert panel["pageviews"].notna().sum() == 1
+
+
+def test_build_panel_accepts_mixed_date_resolutions() -> None:
+    inputs = make_inputs()
+    inputs["macro"]["date"] = inputs["macro"]["date"].astype("datetime64[ms]")
+    inputs["prices"]["date"] = inputs["prices"]["date"].astype("datetime64[us]")
+    inputs["membership"]["date"] = inputs["membership"]["date"].astype("datetime64[s]")
+    inputs["filings"]["filing_date"] = inputs["filings"]["filing_date"].astype("datetime64[ms]")
+    assert len(dr.build_panel(**inputs)) == 6
 
 
 def test_build_panel_makes_macro_available_one_business_day_later() -> None:

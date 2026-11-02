@@ -1,0 +1,12 @@
+event_id,event_date,affected_group,trigger,actor,named_tickers,proposed_tickers,source_url,substitutes_paid_workflow,depends_on_proprietary_data,product_status,label_notes
+E01,2023-05-02,Online education,Chegg CEO says student interest in ChatGPT hurt new customer growth,OpenAI (indirect),CHGG PSON.L,,https://business.inquirer.net/?p=398975,,,,
+E02,2025-09-30,Front-office application software,OpenAI products for marketing and contracts,OpenAI,,CRM HUBS,https://finance.yahoo.com/news/stock-market-reflecting-fears-ai-133000491.html,,,,
+E03,2026-01-30,Gaming,Early version of Google Project Genie for creating virtual worlds,Google,,TTWO EA RBLX UBI.PA,https://finance.yahoo.com/news/stock-market-reflecting-fears-ai-133000491.html,,,,
+E04,2026-02-03,Legal technology and information services,Legal plugin for Claude,Anthropic,REL.L WKL.AS TRI.TO FDS,,https://finance.yahoo.com/news/stock-market-reflecting-fears-ai-133000491.html,,,,
+E05,2026-02-09,Insurance brokers,OpenAI approves its first AI insurance app,OpenAI,,MRSH AON AJG WTW BRO,https://finance.yahoo.com/news/stock-market-reflecting-fears-ai-133000491.html,,,,
+E06,2026-02-10,Wealth managers,AI tax-planning feature,Altruist,,SCHW RJF LPLA,https://finance.yahoo.com/news/stock-market-reflecting-fears-ai-133000491.html,,,,
+E07,2026-02-11,Property managers and office REITs,Fears that AI will take white-collar jobs,None (narrative),,CBRE JLL,https://finance.yahoo.com/news/stock-market-reflecting-fears-ai-133000491.html,,,,
+E08,2026-02-12,Freight logistics,Claim that a tool handles 400% more freight without more staff,Algorhythm Holdings,CHRW XPO CSX FDX,EXPD JBHT ODFL,https://finance.yahoo.com/news/stock-market-reflecting-fears-ai-133000491.html,,,,
+E09,2026-02-20,Cybersecurity,Claude Code Security launch,Anthropic,CRWD ZS PANW,,https://finance.yahoo.com/news/anthropic-claude-code-security-launch-200400637.html,,,,
+E10,2026-02-23,IT services and legacy systems,Claude applied to COBOL modernisation,Anthropic,IBM,,https://www.cnbc.com/2026/02/23/ibm-is-the-latest-ai-casualty-shares-are-tanking-on-anthropic-cobol-threat.html,,,,
+E11,2026-03-27,Cybersecurity,Leaked draft documents describe a more powerful Claude model,Anthropic,CRWD PANW ZS TENB NTSK,QLYS RPD,https://www.hl.co.uk/shares/stock-market-news/company--news/us-cybersecurity-stocks-slide-as-anthropic-accidentally-leaks-details-of-new-ai-model,,,,

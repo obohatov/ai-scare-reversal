@@ -66,6 +66,36 @@ EUROPEAN_ARTICLES = {
     "UBI.PA": "Ubisoft",
 }
 
+# Index members whose symbol changed: old symbol -> symbol that Yahoo serves now.
+TICKER_RENAMES = {
+    "ABC": "COR",
+    "ADS": "BFH",
+    "ANTM": "ELV",
+    "BHGE": "BKR",
+    "BK": "BNY",
+    "BLL": "BALL",
+    "FB": "META",
+    "FI": "FISV",
+    "FLT": "CPAY",
+    "GPS": "GAP",
+    "HFC": "DINO",
+    "MMC": "MRSH",
+    "NLOK": "GEN",
+    "PEAK": "DOC",
+    "PKI": "RVTY",
+    "RE": "EG",
+    "SYMC": "GEN",
+    "TMK": "GL",
+    "UTX": "RTX",
+    "VIAC": "PARA",
+    "WLTW": "WTW",
+}
+
+# Stocks named in AI-scare events that may sit outside the S&P 500.
+AI_EVENT_EXTRAS = [
+    "CHGG", "HUBS", "JLL", "LPLA", "NTSK", "QLYS", "RBLX", "RPD", "TENB", "XPO", "ZS",
+]
+
 # Used for the Wikimedia check: English Wikipedia article titles.
 SAMPLE_ARTICLES = ["RELX", "Wolters_Kluwer", "FactSet"]
 

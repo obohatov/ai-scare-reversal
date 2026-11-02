@@ -67,6 +67,7 @@ This writes `data/processed/panel.parquet`, with one row per ticker and trading 
 ```text
 .
 ├── data/          # local only, never committed
+├── events/        # hand-labelled AI events
 ├── notebooks/     # research notebooks
 ├── reports/       # source check reports
 ├── scripts/
@@ -76,6 +77,10 @@ This writes `data/processed/panel.parquet`, with one row per ticker and trading 
 │   └── universe.py
 └── tests/
 ```
+
+## Known data limits
+
+Yahoo serves no history for most companies that were acquired or went bankrupt. Index members with prices cover about 72% of the 2010 index and about 97% of the end-2024 index, before symbol renames are applied. Training data therefore leans towards survivors, and the test period is much less affected.
 
 ## Data policy
 
