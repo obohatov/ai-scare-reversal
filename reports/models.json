@@ -18,12 +18,12 @@
       "top_median_rel_growth": 0.9798
     },
     {
-      "family": "xgboost",
-      "params": "{\"colsample_bytree\": 0.6, \"learning_rate\": 0.03, \"max_depth\": 2, \"min_child_weight\": 20, \"n_estimators\": 300, \"subsample\": 0.8}",
-      "validation_auc": 0.4977,
+      "family": "forest",
+      "params": "{\"max_depth\": 4, \"min_samples_leaf\": 20, \"n_estimators\": 300}",
+      "validation_auc": 0.4979,
       "top_events": 251,
-      "top_precision": 0.3665,
-      "top_median_rel_growth": 0.9769
+      "top_precision": 0.3386,
+      "top_median_rel_growth": 0.9763
     },
     {
       "family": "logistic",
@@ -34,9 +34,9 @@
       "top_median_rel_growth": 0.9886
     },
     {
-      "family": "forest",
-      "params": "{\"max_depth\": 4, \"min_samples_leaf\": 20, \"n_estimators\": 300}",
-      "validation_auc": 0.494,
+      "family": "xgboost",
+      "params": "{\"colsample_bytree\": 0.6, \"learning_rate\": 0.03, \"max_depth\": 2, \"min_child_weight\": 20, \"n_estimators\": 300, \"subsample\": 0.8}",
+      "validation_auc": 0.4939,
       "top_events": 251,
       "top_precision": 0.3307,
       "top_median_rel_growth": 0.9761
@@ -52,12 +52,12 @@
       "top_median_rel_growth": 0.9798
     },
     {
-      "family": "xgboost",
-      "params": "{\"colsample_bytree\": 0.6, \"learning_rate\": 0.03, \"max_depth\": 2, \"min_child_weight\": 20, \"n_estimators\": 300, \"subsample\": 0.8}",
-      "validation_auc": 0.4977,
+      "family": "forest",
+      "params": "{\"max_depth\": 4, \"min_samples_leaf\": 20, \"n_estimators\": 300}",
+      "validation_auc": 0.4979,
       "top_events": 251,
-      "top_precision": 0.3665,
-      "top_median_rel_growth": 0.9769
+      "top_precision": 0.3386,
+      "top_median_rel_growth": 0.9763
     },
     {
       "family": "logistic",
@@ -76,22 +76,6 @@
       "top_median_rel_growth": 0.9886
     },
     {
-      "family": "xgboost",
-      "params": "{\"colsample_bytree\": 0.6, \"learning_rate\": 0.03, \"max_depth\": 3, \"min_child_weight\": 20, \"n_estimators\": 100, \"subsample\": 0.8}",
-      "validation_auc": 0.4954,
-      "top_events": 251,
-      "top_precision": 0.3506,
-      "top_median_rel_growth": 0.9763
-    },
-    {
-      "family": "xgboost",
-      "params": "{\"colsample_bytree\": 0.6, \"learning_rate\": 0.03, \"max_depth\": 3, \"min_child_weight\": 20, \"n_estimators\": 300, \"subsample\": 0.8}",
-      "validation_auc": 0.4951,
-      "top_events": 251,
-      "top_precision": 0.3705,
-      "top_median_rel_growth": 0.979
-    },
-    {
       "family": "logistic",
       "params": "{\"C\": 0.01}",
       "validation_auc": 0.4949,
@@ -100,19 +84,19 @@
       "top_median_rel_growth": 0.984
     },
     {
-      "family": "forest",
-      "params": "{\"max_depth\": 4, \"min_samples_leaf\": 20, \"n_estimators\": 300}",
-      "validation_auc": 0.494,
+      "family": "xgboost",
+      "params": "{\"colsample_bytree\": 0.6, \"learning_rate\": 0.03, \"max_depth\": 2, \"min_child_weight\": 20, \"n_estimators\": 300, \"subsample\": 0.8}",
+      "validation_auc": 0.4939,
       "top_events": 251,
       "top_precision": 0.3307,
       "top_median_rel_growth": 0.9761
     },
     {
-      "family": "forest",
-      "params": "{\"max_depth\": 10, \"min_samples_leaf\": 50, \"n_estimators\": 300}",
-      "validation_auc": 0.4935,
+      "family": "xgboost",
+      "params": "{\"colsample_bytree\": 0.6, \"learning_rate\": 0.03, \"max_depth\": 4, \"min_child_weight\": 20, \"n_estimators\": 100, \"subsample\": 0.8}",
+      "validation_auc": 0.4939,
       "top_events": 251,
-      "top_precision": 0.3267,
+      "top_precision": 0.3347,
       "top_median_rel_growth": 0.9763
     },
     {
@@ -125,35 +109,35 @@
     },
     {
       "family": "forest",
-      "params": "{\"max_depth\": 10, \"min_samples_leaf\": 20, \"n_estimators\": 300}",
-      "validation_auc": 0.4933,
+      "params": "{\"max_depth\": 10, \"min_samples_leaf\": 50, \"n_estimators\": 300}",
+      "validation_auc": 0.4928,
       "top_events": 251,
-      "top_precision": 0.3147,
-      "top_median_rel_growth": 0.9741
+      "top_precision": 0.3068,
+      "top_median_rel_growth": 0.9761
     },
     {
-      "family": "xgboost",
-      "params": "{\"colsample_bytree\": 0.6, \"learning_rate\": 0.03, \"max_depth\": 4, \"min_child_weight\": 20, \"n_estimators\": 100, \"subsample\": 0.8}",
-      "validation_auc": 0.4931,
+      "family": "forest",
+      "params": "{\"max_depth\": 4, \"min_samples_leaf\": 50, \"n_estimators\": 300}",
+      "validation_auc": 0.4921,
       "top_events": 251,
-      "top_precision": 0.3307,
+      "top_precision": 0.3187,
       "top_median_rel_growth": 0.9757
     },
     {
       "family": "xgboost",
-      "params": "{\"colsample_bytree\": 0.6, \"learning_rate\": 0.03, \"max_depth\": 2, \"min_child_weight\": 20, \"n_estimators\": 100, \"subsample\": 0.8}",
-      "validation_auc": 0.4922,
+      "params": "{\"colsample_bytree\": 0.6, \"learning_rate\": 0.03, \"max_depth\": 3, \"min_child_weight\": 20, \"n_estimators\": 100, \"subsample\": 0.8}",
+      "validation_auc": 0.4919,
       "top_events": 251,
-      "top_precision": 0.3546,
-      "top_median_rel_growth": 0.9772
+      "top_precision": 0.3466,
+      "top_median_rel_growth": 0.9761
     },
     {
       "family": "forest",
       "params": "{\"max_depth\": 6, \"min_samples_leaf\": 20, \"n_estimators\": 300}",
-      "validation_auc": 0.4922,
+      "validation_auc": 0.4919,
       "top_events": 251,
-      "top_precision": 0.3307,
-      "top_median_rel_growth": 0.9761
+      "top_precision": 0.3147,
+      "top_median_rel_growth": 0.9757
     },
     {
       "family": "tree",
@@ -164,20 +148,28 @@
       "top_median_rel_growth": 0.9772
     },
     {
+      "family": "xgboost",
+      "params": "{\"colsample_bytree\": 0.6, \"learning_rate\": 0.03, \"max_depth\": 3, \"min_child_weight\": 20, \"n_estimators\": 300, \"subsample\": 0.8}",
+      "validation_auc": 0.491,
+      "top_events": 251,
+      "top_precision": 0.3386,
+      "top_median_rel_growth": 0.9763
+    },
+    {
+      "family": "forest",
+      "params": "{\"max_depth\": 6, \"min_samples_leaf\": 50, \"n_estimators\": 300}",
+      "validation_auc": 0.4904,
+      "top_events": 251,
+      "top_precision": 0.3068,
+      "top_median_rel_growth": 0.9741
+    },
+    {
       "family": "tree",
       "params": "{\"max_depth\": 6, \"min_samples_leaf\": 50}",
       "validation_auc": 0.49,
       "top_events": 251,
       "top_precision": 0.4104,
       "top_median_rel_growth": 0.9853
-    },
-    {
-      "family": "forest",
-      "params": "{\"max_depth\": 4, \"min_samples_leaf\": 50, \"n_estimators\": 300}",
-      "validation_auc": 0.4899,
-      "top_events": 251,
-      "top_precision": 0.3347,
-      "top_median_rel_growth": 0.9766
     },
     {
       "family": "tree",
@@ -188,19 +180,27 @@
       "top_median_rel_growth": 0.9745
     },
     {
-      "family": "forest",
-      "params": "{\"max_depth\": 6, \"min_samples_leaf\": 50, \"n_estimators\": 300}",
-      "validation_auc": 0.4886,
+      "family": "xgboost",
+      "params": "{\"colsample_bytree\": 0.6, \"learning_rate\": 0.03, \"max_depth\": 4, \"min_child_weight\": 20, \"n_estimators\": 300, \"subsample\": 0.8}",
+      "validation_auc": 0.4888,
       "top_events": 251,
-      "top_precision": 0.3386,
-      "top_median_rel_growth": 0.9763
+      "top_precision": 0.3506,
+      "top_median_rel_growth": 0.9772
     },
     {
       "family": "xgboost",
-      "params": "{\"colsample_bytree\": 0.6, \"learning_rate\": 0.03, \"max_depth\": 4, \"min_child_weight\": 20, \"n_estimators\": 300, \"subsample\": 0.8}",
-      "validation_auc": 0.4855,
+      "params": "{\"colsample_bytree\": 0.6, \"learning_rate\": 0.03, \"max_depth\": 2, \"min_child_weight\": 20, \"n_estimators\": 100, \"subsample\": 0.8}",
+      "validation_auc": 0.4872,
       "top_events": 251,
-      "top_precision": 0.3546,
+      "top_precision": 0.3307,
+      "top_median_rel_growth": 0.9763
+    },
+    {
+      "family": "forest",
+      "params": "{\"max_depth\": 10, \"min_samples_leaf\": 20, \"n_estimators\": 300}",
+      "validation_auc": 0.4859,
+      "top_events": 251,
+      "top_precision": 0.3347,
       "top_median_rel_growth": 0.9772
     }
   ]
