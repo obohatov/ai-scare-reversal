@@ -1,0 +1,35 @@
+{
+  "events": 17957,
+  "tickers": 631,
+  "embargo": {
+    "events": 167,
+    "first": "2022-11-17",
+    "last": "2024-12-20",
+    "labelled": 167,
+    "base_rate": 0.5329
+  },
+  "test": {
+    "events": 3220,
+    "first": "2025-01-03",
+    "last": "2026-10-30",
+    "labelled": 2938
+  },
+  "train": {
+    "events": 12056,
+    "first": "2010-03-05",
+    "last": "2022-11-16",
+    "labelled": 12056,
+    "base_rate": 0.46
+  },
+  "validation": {
+    "events": 2514,
+    "first": "2023-01-03",
+    "last": "2024-11-15",
+    "labelled": 2514,
+    "base_rate": 0.4491
+  },
+  "test_frozen_universe_events": 2890,
+  "has_8k_known_share": 0.929,
+  "pageviews_known_share": 0.647,
+  "numeric_features": 39
+}

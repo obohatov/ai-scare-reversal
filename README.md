@@ -2,7 +2,7 @@
 
 Final project for the [Stock Markets Analytics Zoomcamp 2026](https://github.com/DataTalksClub/stock-markets-analytics-zoomcamp) by DataTalks.Club.
 
-> **Status:** stage 2 of 9, data build. No strategy has been tested yet, and no result here claims profitability.
+> **Status:** stage 4 of 9, features. No strategy has been tested yet, and no result here claims profitability.
 
 ## Problem
 
@@ -51,6 +51,19 @@ python -m scripts.data_repo --step all
 
 This writes `data/processed/panel.parquet`, with one row per ticker and trading day, and `reports/data_build.json`. A repeated run resumes from what is already saved. One step can be run alone with, for example, `--step prices`.
 
+## Build the features
+
+```bash
+python -m scripts.transform
+```
+
+This writes `data/processed/events.parquet`, with one row per sharp fall, plus `reports/feature_sets.json` and `reports/features_summary.json`.
+
+- **Event:** a daily return at least 2.5 standard deviations and 3 percentage points below the sector. Sector returns leave out the stock itself, and repeats within 5 sessions are ignored.
+- **Target:** whether the stock beats its sector from the next open to the close 30 sessions later.
+- **Splits:** train to 2022, validation 2023-2024, test from 2025, with a 45-day gap before each later period.
+- **Universe:** the main test uses S&P 500 members frozen at the end of 2024. European peers and event extras were chosen because of AI scares, so they are flagged and reported separately.
+
 ## Data sources
 
 | Source | Purpose | Access |
@@ -74,6 +87,7 @@ This writes `data/processed/panel.parquet`, with one row per ticker and trading 
 │   ├── check_sources.py
 │   ├── data_repo.py
 │   ├── settings.py
+│   ├── transform.py
 │   └── universe.py
 └── tests/
 ```
