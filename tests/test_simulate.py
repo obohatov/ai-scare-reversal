@@ -217,6 +217,15 @@ def test_cash_curve_compounds_the_rate() -> None:
     assert curve.iloc[-1] == pytest.approx(100_100.0)
 
 
+def test_prices_stop_at_the_last_protocol_date() -> None:
+    dates = pd.to_datetime(["2026-10-30", "2026-11-02"])
+    panel = pd.DataFrame(
+        {"date": list(dates) * 2, "ticker": ["SPY", "SPY", "AAA", "AAA"], "adj_close": 1.0}
+    )
+    events = pd.DataFrame({"ticker": ["AAA"], "exit_date": [pd.NaT]})
+    assert sm.load_prices(events, panel).index.max() == dates[0]
+
+
 def test_test_period_needs_explicit_confirmation() -> None:
     with pytest.raises(SystemExit):
         sm.main(["--period", "test"])

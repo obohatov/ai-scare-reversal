@@ -35,6 +35,7 @@ STOCK_FEE = 0.001  # per side, as in the course
 ETF_FEE = 0.0002  # per side
 TRADING_DAYS = 252
 TOP_SCORE_QUANTILE = 0.90
+TEST_END = "2026-10-30"  # later rows may come from an unfinished session
 SHORT_BORROW_RATE = 0.01  # a year, on the value of open shorts
 SPREAD_SIDE_POSITIONS = 10
 
@@ -335,7 +336,7 @@ def load_prices(events: pd.DataFrame, panel: pd.DataFrame) -> pd.DataFrame:
     tickers = set(events["ticker"]) | {BENCHMARK}
     rows = panel[panel["ticker"].isin(tickers)]
     wide = rows.pivot(index="date", columns="ticker", values="adj_close")
-    wide = wide[wide[BENCHMARK].notna()].astype(float)
+    wide = wide[wide[BENCHMARK].notna() & (wide.index <= TEST_END)].astype(float)
     last_exit = events["exit_date"].max()
     if pd.notna(last_exit) and events["exit_date"].notna().all():
         wide = wide[wide.index <= last_exit]

@@ -2,7 +2,7 @@
 
 Final project for the [Stock Markets Analytics Zoomcamp 2026](https://github.com/DataTalksClub/stock-markets-analytics-zoomcamp) by DataTalks.Club.
 
-> **Status:** stage 6 of 9, simulation. No strategy has been tested yet, and no result here claims profitability.
+> **Status:** stage 7 of 9, test period. No strategy has been tested yet, and no result here claims profitability.
 
 ## Problem
 
@@ -89,6 +89,15 @@ python -m scripts.simulate
 
 This compares strategies with holding SPY over the validation period and writes `reports/simulation_validation.json`. Capital stays in the index between trades. Positions enter at the next open, hold for 30 sessions and pay 0.1% per side. The report also holds an equal-weight index of S&P 500 members, a core-satellite version with 2% per position, and `news_spread`, a market-neutral book that buys falls without company news and shorts falls after earnings, paying a 1% yearly borrow cost. The test period stays closed until the strategies are fixed.
 
+## Open the test period
+
+The rules are fixed in `reports/test_protocol.md`.
+
+```bash
+python -m scripts.simulate --period test --confirm-frozen
+python -m scripts.ai_slice
+```
+
 ## Data sources
 
 | Source | Purpose | Access |
@@ -109,6 +118,7 @@ This compares strategies with holding SPY over the validation period and writes 
 ├── notebooks/     # research notebooks
 ├── reports/       # source check reports
 ├── scripts/
+│   ├── ai_slice.py
 │   ├── check_sources.py
 │   ├── data_repo.py
 │   ├── eda.py
