@@ -34,3 +34,7 @@ The chosen Decision Tree showed no signal on validation (AUC 0.509). `top_score`
 - Comparison group: sharp falls of index members in the test period, outside the AI lists.
 - E01 lies before the test period and is reported with the others, marked as such.
 - With 11 overlapping events selected on their fall, results are descriptive, not a statistical proof.
+
+## Note added after the test
+
+An outside review found that `rel_growth_30d` measures the stock from the next open and the sector from the event-day close. The frozen results were not changed. `scripts/robustness.py` is a later check with matched spans, not part of the original test.

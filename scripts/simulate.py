@@ -213,7 +213,7 @@ def spread_equity(
     """Run a market-neutral book; idle collateral earns the overnight rate.
 
     Each position takes half of 1 / side_positions of equity, so full books hold
-    100% long and 100% short. `rates` is in percent a year.
+    50% long and 50% short. `rates` is in percent a year.
     """
     calendar = prices.index
     position_of = {day: number for number, day in enumerate(calendar)}

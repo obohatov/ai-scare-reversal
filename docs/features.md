@@ -7,7 +7,7 @@ Every feature uses data available at the close of the event day. `reports/featur
 | Name | Meaning |
 |---|---|
 | `is_positive_rel_30d` | 1 if the stock beats its sector from the next open to the close 30 sessions later |
-| `rel_growth_30d` | Stock growth divided by sector growth over that span |
+| `rel_growth_30d` | Stock growth divided by close-to-close sector growth from the event day; the sector span also holds the overnight move before entry |
 | `growth_30d` | Stock growth over that span |
 
 ## Numeric
