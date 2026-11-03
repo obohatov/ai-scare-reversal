@@ -107,7 +107,7 @@ python -m scripts.ai_slice
 4. **Target.** Whether the stock beats its sector from the next open to the close 30 sessions later.
 5. **Models.** Logistic regression, Decision Tree, Random Forest and XGBoost, with 20 settings compared on validation.
 6. **Simulation.** Vector and exact versions, with up to 10 positions, reinvestment, 0.1% cost per side and capital held in SPY between trades.
-7. **Automation.** `python main.py --mode update` adds new data incrementally, finds signals, sends a Telegram message and places paper orders. `railway.toml` schedules it for weekdays at 22:30 UTC, with data on a volume set by `DATA_DIR`. Telegram and Alpaca run only when their keys are set, and Alpaca uses the paper endpoint only.
+7. **Automation.** `python main.py --mode update` adds new data incrementally, finds signals, sends a Telegram message and places paper orders. A Railway cron service runs it from the `Dockerfile` on weekdays at 22:30 UTC (`30 22 * * 1-5`, set in the service settings), with data on a volume set by `DATA_DIR`. Telegram and Alpaca run only when their keys are set, and Alpaca uses the paper endpoint only.
 
 ## Repository layout
 
@@ -115,7 +115,6 @@ python -m scripts.ai_slice
 .
 ├── Dockerfile
 ├── main.py          # whole workflow
-├── railway.toml     # cloud schedule
 ├── data/            # local only, never committed
 ├── docs/            # feature descriptions
 ├── events/          # hand-labelled AI events
