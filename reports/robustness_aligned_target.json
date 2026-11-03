@@ -1,0 +1,47 @@
+{
+  "note": "Post-test check with matched close-to-close spans; not a tradable result.",
+  "beat_sector": {
+    "train": {
+      "ordinary_days": 0.4704,
+      "sharp_falls": 0.4566,
+      "sharp_fall_count": 11195
+    },
+    "validation": {
+      "ordinary_days": 0.4702,
+      "sharp_falls": 0.4525,
+      "sharp_fall_count": 2345
+    },
+    "test": {
+      "ordinary_days": 0.4503,
+      "sharp_falls": 0.4549,
+      "sharp_fall_count": 2708
+    }
+  },
+  "ai_events": {
+    "events": 11,
+    "mean": 1.0285,
+    "std_error": 0.0185
+  },
+  "ai_comparison_sharp_falls": {
+    "events": 2584,
+    "mean_rel_growth": 0.9898,
+    "share_beating_sector": 0.4555
+  },
+  "ai_by_label": {
+    "no": {
+      "events": 3,
+      "mean": 1.0035,
+      "std_error": 0.0317
+    },
+    "partly": {
+      "events": 7,
+      "mean": 1.0294,
+      "std_error": 0.0244
+    },
+    "yes": {
+      "events": 1,
+      "mean": 1.0972,
+      "std_error": null
+    }
+  }
+}
