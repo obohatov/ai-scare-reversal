@@ -213,7 +213,11 @@ def add_context_features(frame: pd.DataFrame, covered: set[str]) -> pd.DataFrame
 
 
 def add_target(frame: pd.DataFrame, horizon: int = HORIZON) -> pd.DataFrame:
-    """Compare next-open-to-close growth with the sector over the same span."""
+    """Compare next-open-to-close growth with close-to-close sector growth.
+
+    The spans differ by the overnight move before entry, because sector returns
+    exist only from close to close. `align_target` gives the matched version.
+    """
     df = frame
     by_ticker = df.groupby("ticker", sort=False)
     adjusted_open = df["open"] * df["adj_close"] / df["close"].replace(0, np.nan)
@@ -226,6 +230,21 @@ def add_target(frame: pd.DataFrame, horizon: int = HORIZON) -> pd.DataFrame:
     cumulative = sector_log.groupby(df["ticker"], sort=False).cumsum()
     future = cumulative.groupby(df["ticker"], sort=False).shift(-(horizon + 1))
     df["sector_growth_30d"] = np.exp(future - cumulative)
+    df["rel_growth_30d"] = df["growth_30d"] / df["sector_growth_30d"]
+    positive = (df["rel_growth_30d"] > 1).astype(float)
+    df["is_positive_rel_30d"] = positive.where(df["rel_growth_30d"].notna())
+    return df
+
+
+def align_target(frame: pd.DataFrame, horizon: int = HORIZON) -> pd.DataFrame:
+    """Measure stock and sector over one close-to-close span.
+
+    This replaces next-open entry, so it describes the signal and not a tradable
+    result. It runs after `add_target`, whose sector growth it reuses.
+    """
+    df = frame
+    future = df.groupby("ticker", sort=False)["adj_close"].shift(-(horizon + 1))
+    df["growth_30d"] = future / df["adj_close"]
     df["rel_growth_30d"] = df["growth_30d"] / df["sector_growth_30d"]
     positive = (df["rel_growth_30d"] > 1).astype(float)
     df["is_positive_rel_30d"] = positive.where(df["rel_growth_30d"].notna())

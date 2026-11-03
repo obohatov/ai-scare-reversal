@@ -116,6 +116,18 @@ def test_target_accepts_a_shorter_horizon() -> None:
     assert row["growth_30d"] == pytest.approx(expected)
 
 
+def test_aligned_target_uses_one_span_for_stock_and_sector() -> None:
+    panel = make_panel()
+    daily = tf.build_daily(panel, set(TICKERS), set(TICKERS), TODAY)
+    aligned = tf.align_target(daily.copy())
+    row = aligned[aligned["ticker"] == "T1"].iloc[100]
+    stock = panel[panel["ticker"] == "T1"].reset_index(drop=True)
+    position = stock.index[stock["date"] == row["date"]][0]
+    expected = stock.loc[position + 31, "adj_close"] / stock.loc[position, "adj_close"]
+    assert row["growth_30d"] == pytest.approx(expected)
+    assert row["rel_growth_30d"] == pytest.approx(expected / row["sector_growth_30d"])
+
+
 def test_target_is_empty_without_enough_future() -> None:
     panel = make_panel(sessions=DROP_DAY + 10)
     events = run(panel)
