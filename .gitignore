@@ -15,3 +15,6 @@ data/*
 *.parquet
 *.brotli
 *.zip
+
+# Editor
+.vscode/
